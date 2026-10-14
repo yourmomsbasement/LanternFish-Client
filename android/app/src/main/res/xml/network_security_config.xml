@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Home Jellyfin servers are often plain http on the local network; let users connect to them. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <!-- Self-signed certificates the user installed on the device -->
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

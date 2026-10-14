@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Sign in with a Quick Connect code (approved from a phone or computer), or with a username and password. -->
+<component name="LoginScreen" extends="JFScreen">
+    <script type="text/brightscript" uri="pkg:/components/screens/LoginScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Utils.brs" />
+    <children>
+        <Label text="JELLYFLIX" translation="[120, 90]" color="0xE50914FF">
+            <Font role="font" uri="font:BoldSystemFontFile" size="64" />
+        </Label>
+        <Label id="heading" text="Sign in" translation="[120, 230]" width="1680" color="0xFFFFFFFF">
+            <Font role="font" uri="font:BoldSystemFontFile" size="52" />
+        </Label>
+
+        <Group id="quickConnect" translation="[120, 340]">
+            <Label text="Quick Connect" color="0xFFFFFFFF">
+                <Font role="font" uri="font:BoldSystemFontFile" size="34" />
+            </Label>
+            <Label id="qcHelp" translation="[0, 56]" width="900" wrap="true" color="0xB3B3B3FF"
+                   text="On your phone or computer, open JellyFlix, choose your profile picture → Quick Connect, and enter this code:">
+                <Font role="font" uri="font:SystemFontFile" size="28" />
+            </Label>
+            <Rectangle translation="[0, 180]" width="560" height="150" color="0x2A2A2AFF" />
+            <Label id="code" translation="[0, 180]" width="560" height="150" horizAlign="center" vertAlign="center" color="0xFFFFFFFF" text="······">
+                <Font role="font" uri="font:BoldSystemFontFile" size="96" />
+            </Label>
+            <Label id="qcStatus" translation="[0, 360]" width="900" wrap="true" color="0xB3B3B3FF">
+                <Font role="font" uri="font:SystemFontFile" size="24" />
+            </Label>
+        </Group>
+
+        <LabelList id="actions" translation="[1180, 520]" itemSize="[620, 76]" itemSpacing="[0, 12]"
+                   color="0xFFFFFFFF" focusedColor="0x141414FF" textHorizAlign="center">
+            <Font role="font" uri="font:SystemFontFile" size="30" />
+            <Font role="focusedFont" uri="font:BoldSystemFontFile" size="30" />
+        </LabelList>
+        <Label id="status" translation="[1180, 720]" width="620" wrap="true" color="0xB3B3B3FF">
+            <Font role="font" uri="font:SystemFontFile" size="26" />
+        </Label>
+
+        <Timer id="poll" duration="3" repeat="true" />
+    </children>
+</component>

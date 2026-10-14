@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- A page of posters for a library query, e.g. My List. -->
+<component name="GridScreen" extends="JFScreen">
+    <script type="text/brightscript" uri="pkg:/components/screens/GridScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Utils.brs" />
+    <children>
+        <Label id="title" translation="[120, 70]" color="0xFFFFFFFF">
+            <Font role="font" uri="font:BoldSystemFontFile" size="52" />
+        </Label>
+        <MarkupGrid id="grid" translation="[120, 180]" itemComponentName="PosterItem" numColumns="7" numRows="3"
+                    itemSize="[220, 330]" itemSpacing="[30, 40]" drawFocusFeedback="false" vertFocusAnimationStyle="floatingFocus" />
+        <Label id="empty" translation="[120, 200]" width="1600" wrap="true" color="0xB3B3B3FF" visible="false">
+            <Font role="font" uri="font:SystemFontFile" size="30" />
+        </Label>
+        <BusySpinner id="spinner" translation="[928, 508]" visible="false" />
+    </children>
+</component>

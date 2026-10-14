@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- "Who's watching?": the household's JellyFlix profiles. Each profile is its own Jellyfin user and session. -->
+<component name="ProfilesScreen" extends="JFScreen">
+    <script type="text/brightscript" uri="pkg:/components/screens/ProfilesScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Utils.brs" />
+    <children>
+        <Label text="Who's watching?" width="1920" translation="[0, 220]" horizAlign="center" color="0xFFFFFFFF">
+            <Font role="font" uri="font:BoldSystemFontFile" size="64" />
+        </Label>
+        <MarkupGrid id="grid" itemComponentName="ProfileItem" numRows="1" numColumns="5"
+                    itemSize="[220, 310]" itemSpacing="[50, 0]" drawFocusFeedback="false" translation="[0, 400]" />
+        <LabelList id="actions" translation="[710, 800]" itemSize="[500, 64]"
+                   color="0xB3B3B3FF" focusedColor="0x141414FF" textHorizAlign="center">
+            <Font role="font" uri="font:SystemFontFile" size="28" />
+            <Font role="focusedFont" uri="font:BoldSystemFontFile" size="28" />
+        </LabelList>
+        <Label id="status" width="1400" translation="[260, 950]" horizAlign="center" wrap="true" color="0xB3B3B3FF">
+            <Font role="font" uri="font:SystemFontFile" size="26" />
+        </Label>
+        <BusySpinner id="spinner" translation="[928, 520]" visible="false" />
+    </children>
+</component>

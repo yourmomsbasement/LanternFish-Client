@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Finds Jellyfin servers on the local network: they answer "who is JellyfinServer?" broadcast to UDP 7359. -->
+<component name="DiscoveryTask" extends="Task">
+    <interface>
+        <!-- [{ Id, Name, Address }] -->
+        <field id="servers" type="array" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/tasks/DiscoveryTask.brs" />
+</component>

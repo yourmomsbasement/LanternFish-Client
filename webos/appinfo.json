@@ -1,0 +1,18 @@
+{
+    "id": "com.jellyflix.app",
+    "version": "{{version}}",
+    "vendor": "JellyFlix",
+    "type": "web",
+    "main": "index.html",
+    "title": "JellyFlix",
+    "icon": "icon.png",
+    "largeIcon": "largeIcon.png",
+    "splashBackground": "splash.png",
+    "bgColor": "#141414",
+    "iconColor": "#141414",
+    "resolution": "1920x1080",
+    "disableBackHistoryAPI": true,
+    "handlesRelaunch": false,
+    "supportTouchMode": "virtual",
+    "requiredACG": ["application.launcher"]
+}

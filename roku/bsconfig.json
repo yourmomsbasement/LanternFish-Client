@@ -1,0 +1,15 @@
+{
+    "rootDir": ".",
+    "files": [
+        "manifest",
+        "source/**/*",
+        "components/**/*",
+        "images/**/*"
+    ],
+    "createPackage": false,
+    "diagnosticFilters": [],
+    "emitDefinitions": false,
+    "stagingDir": "../build/roku-staging",
+    "outFile": "../build/roku-bsc.zip",
+    "retainStagingDir": false
+}

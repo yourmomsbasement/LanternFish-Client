@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Seasons on the left, the focused season's episodes on the right. -->
+<component name="EpisodesScreen" extends="JFScreen">
+    <script type="text/brightscript" uri="pkg:/components/screens/EpisodesScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Utils.brs" />
+    <children>
+        <Poster id="backdrop" width="1920" height="1080" loadWidth="1920" loadHeight="1080" loadDisplayMode="scaleToZoom" opacity="0.25" />
+        <Label id="title" translation="[120, 70]" width="1680" color="0xFFFFFFFF">
+            <Font role="font" uri="font:BoldSystemFontFile" size="52" />
+        </Label>
+        <LabelList id="seasons" translation="[120, 200]" itemSize="[400, 70]" itemSpacing="[0, 8]" numRows="10"
+                   color="0xB3B3B3FF" focusedColor="0x141414FF">
+            <Font role="font" uri="font:BoldSystemFontFile" size="30" />
+            <Font role="focusedFont" uri="font:BoldSystemFontFile" size="30" />
+        </LabelList>
+        <MarkupList id="episodes" translation="[600, 200]" itemComponentName="EpisodeItem"
+                    itemSize="[1180, 200]" itemSpacing="[0, 16]" numRows="4" drawFocusFeedback="false"
+                    vertFocusAnimationStyle="floatingFocus" />
+        <BusySpinner id="spinner" translation="[1160, 500]" visible="false" />
+        <Timer id="debounce" duration="0.35" />
+    </children>
+</component>

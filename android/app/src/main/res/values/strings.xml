@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JellyFlix</string>
+    <string name="connect_title">Connect to your server</string>
+    <string name="connect_subtitle">Enter the address of your Jellyfin server with the JellyFlix plugin, or pick one found on your network.</string>
+    <string name="connect_hint">Server address, e.g. 192.168.1.10:8096</string>
+    <string name="connect_button">Connect</string>
+    <string name="connect_searching">Looking for servers on your network…</string>
+    <string name="connect_found">Servers on your network</string>
+    <string name="connect_none_found">No servers found on your network. Enter the address instead.</string>
+    <string name="connect_checking">Connecting to %1$s…</string>
+    <string name="connect_failed">Couldn\'t reach a Jellyfin server at %1$s: %2$s</string>
+    <string name="load_failed">Couldn\'t load JellyFlix from %1$s.</string>
+    <string name="retry">Try again</string>
+    <string name="change_server">Change server</string>
+</resources>
