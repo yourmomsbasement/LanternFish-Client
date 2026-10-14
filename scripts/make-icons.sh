@@ -33,6 +33,8 @@ icon() { # size out
 # Wide image: the wordmark, with the lure growing out of its "L" as on the icon
 wide() { # width height out
     local w=$1 h=$2 p=$(( $1 / 8 ))
+    # Short banners: smaller text, so the lure's glow fits above it
+    if (( p > h / 3 )); then p=$(( h / 3 )); fi
     local tw
     tw=$(convert -font "$FONT" -pointsize "$p" label:'Lanternfish' -format '%w' info:)
     local x0=$(( (w - tw) / 2 )) top=$(( h / 2 - p * 36 / 100 ))
@@ -71,6 +73,11 @@ icon 336 roku/images/logo.png
 convert -size 1080x1344 gradient:'#FFFFFFFF'-'#FFFFFF00' -rotate -90 PNG32:roku/images/fade-left.png
 convert -size 1920x540 gradient:'#FFFFFF00'-'#FFFFFFFF' PNG32:roku/images/fade-bottom.png
 convert -size 64x64 xc:none -fill none -stroke white -strokewidth 7 -draw "arc 6,6 58,58 0,270" PNG32:roku/images/spinner.png
+
+# README header banners (this repo's, and JellyFlix-Web's when WEB_DOCS points at its docs folder)
+mkdir -p docs
+wide 1280 320 docs/banner.png
+if [ -n "${WEB_DOCS:-}" ]; then wide 1280 320 "$WEB_DOCS/banner.png"; fi
 
 # The JellyFlix web client's logos and browser icons, when WEB_ASSETS points at its src/assets/img/lanternfish folder
 if [ -n "${WEB_ASSETS:-}" ]; then

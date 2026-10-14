@@ -1,4 +1,4 @@
-<p align="center"><img alt="Lanternfish" src="webos/splash.png" width="480"/></p>
+<p align="center"><img alt="Lanternfish" src="docs/banner.png"/></p>
 
 # Lanternfish
 
@@ -12,6 +12,25 @@ installed. Without the plugin you still get a working Jellyfin client, just with
 | **Android TV, Google TV, Fire TV** (and phones and tablets) | [`android/`](android) | A WebView app that loads the JellyFlix web client **from your server**, with NativeShell injected | APK |
 | **LG webOS** | [`webos/`](webos) | Packages the JellyFlix web client release with a webOS NativeShell | `.ipk` |
 | **Samsung Tizen** | [`tizen/`](tizen) | Packages the JellyFlix web client release with a Tizen NativeShell | `.wgt` (signed with your Samsung certificate) |
+
+## Artwork
+
+<p align="center">
+<img alt="App icon" src="tizen/icon.png" width="160"/>
+<img alt="Android TV banner" src="android/app/src/main/res/drawable-xhdpi/banner.png" width="284"/>
+<img alt="Roku channel poster" src="roku/images/channel-poster_fhd.png" width="213"/>
+</p>
+<p align="center"><img alt="Splash screen" src="webos/splash.png" width="640"/></p>
+
+The lanternfish's glowing lure grows out of the "L", in the Midnight theme's colors. Everything here (app icons,
+the Android TV banner, Roku posters, splash screens and these banners) is rendered by
+[`scripts/make-icons.sh`](scripts/make-icons.sh), which needs ImageMagick and the Inter font:
+
+```sh
+./scripts/make-icons.sh                                   # this repo's images
+WEB_ASSETS=../JellyFlix-Web/src/assets/img/lanternfish \
+WEB_DOCS=../JellyFlix-Web/docs ./scripts/make-icons.sh    # also the web client's logos, favicons and README banner
+```
 
 ## Why two approaches
 
