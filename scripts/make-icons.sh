@@ -22,10 +22,10 @@ lure() { # in cx cy r out
         "$5"
 }
 
-# Square icon: the lure over a white "L"
+# Square icon: the lure over a white "L" (on the background, or $CANVAS when set, e.g. none for transparent)
 icon() { # size out
     local s=$1
-    convert -size "${s}x${s}" "xc:$BG" -font "$FONT" -fill white -gravity southwest \
+    convert -size "${s}x${s}" "xc:${CANVAS:-$BG}" -font "$FONT" -fill white -gravity southwest \
         -pointsize "$(( s * 70 / 100 ))" -annotate "+$(( s * 14 / 100 ))+$(( s * 2 / 100 ))" 'L' "$2"
     lure "$2" $(( s * 70 / 100 )) $(( s * 27 / 100 )) $(( s * 8 / 100 + 1 )) "$2"
 }
@@ -37,7 +37,7 @@ wide() { # width height out
     tw=$(convert -font "$FONT" -pointsize "$p" label:'Lanternfish' -format '%w' info:)
     local x0=$(( (w - tw) / 2 )) top=$(( h / 2 - p * 36 / 100 ))
     local r=$(( p / 11 + 1 ))
-    convert -size "${w}x${h}" "xc:$BG" -font "$FONT" -fill white -gravity west \
+    convert -size "${w}x${h}" "xc:${CANVAS:-$BG}" -font "$FONT" -fill "${INK:-white}" -gravity west \
         -pointsize "$p" -annotate "+${x0}+0" 'Lanternfish' "$3"
     lure "$3" $(( x0 + p * 9 / 100 + r * 4 )) $(( top - r * 5 )) "$r" "$3"
 }
@@ -71,3 +71,16 @@ icon 336 roku/images/logo.png
 convert -size 1080x1344 gradient:'#FFFFFFFF'-'#FFFFFF00' -rotate -90 PNG32:roku/images/fade-left.png
 convert -size 1920x540 gradient:'#FFFFFF00'-'#FFFFFFFF' PNG32:roku/images/fade-bottom.png
 convert -size 64x64 xc:none -fill none -stroke white -strokewidth 7 -draw "arc 6,6 58,58 0,270" PNG32:roku/images/spinner.png
+
+# The JellyFlix web client's logos and browser icons, when WEB_ASSETS points at its src/assets/img/lanternfish folder
+if [ -n "${WEB_ASSETS:-}" ]; then
+    mkdir -p "$WEB_ASSETS"
+    CANVAS=none icon 512 "$WEB_ASSETS/icon-transparent.png"
+    CANVAS=none wide 1000 400 "$WEB_ASSETS/banner-light.png"
+    CANVAS=none INK="$BG" wide 1000 400 "$WEB_ASSETS/banner-dark.png"
+    for size in 72 114 144 512; do icon "$size" "$WEB_ASSETS/touchicon$size.png"; done
+    icon 180 "$WEB_ASSETS/touchicon.png"
+    icon 48 /tmp/lanternfish-favicon-48.png
+    convert /tmp/lanternfish-favicon-48.png -define icon:auto-resize=48,32,16 "$WEB_ASSETS/favicon.ico"
+    rm -f /tmp/lanternfish-favicon-48.png
+fi
