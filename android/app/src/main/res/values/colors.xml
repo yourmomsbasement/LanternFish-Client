@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generated from shared/themes.json by scripts/gen-themes.mjs. Edit that file, then run `npm run themes`. -->
+<resources>
+    <color name="background">#FF0D1117</color>
+    <color name="surface">#FF1C2230</color>
+    <color name="accent">#FF7AA2FF</color>
+    <color name="text">#FFFFFFFF</color>
+    <color name="text_secondary">#FFA9B1C2</color>
+</resources>

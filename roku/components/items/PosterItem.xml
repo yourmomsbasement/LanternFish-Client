@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- A 2:3 poster in a RowList or grid, with a white frame when focused and a red progress bar when started. -->
+<component name="PosterItem" extends="Group">
+    <interface>
+        <field id="itemContent" type="node" onChange="onContent" />
+        <field id="width" type="float" onChange="onSize" />
+        <field id="height" type="float" onChange="onSize" />
+        <field id="focusPercent" type="float" onChange="onFocus" />
+        <field id="rowFocusPercent" type="float" onChange="onFocus" />
+        <field id="rowListHasFocus" type="boolean" onChange="onFocus" />
+        <field id="gridHasFocus" type="boolean" onChange="onFocus" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/items/PosterItem.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
+    <children>
+        <Rectangle id="frame" color="0xFFFFFFFF" opacity="0" translation="[-5, -5]" />
+        <Rectangle id="placeholder" color="0x2A2A2AFF" />
+        <Label id="fallback" color="0xFFFFFFFF" horizAlign="center" vertAlign="center" wrap="true" maxLines="4" translation="[12, 0]">
+            <Font role="font" uri="font:BoldSystemFontFile" size="24" />
+        </Label>
+        <Poster id="poster" loadDisplayMode="scaleToZoom" />
+        <Rectangle id="track" color="0x5A5A5AFF" height="6" visible="false" />
+        <Rectangle id="bar" color="0xE50914FF" height="6" visible="false" />
+        <Label id="caption" color="0xFFFFFFFF" horizAlign="center" visible="false">
+            <Font role="font" uri="font:SystemFontFile" size="20" />
+        </Label>
+    </children>
+</component>

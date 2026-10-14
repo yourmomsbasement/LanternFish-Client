@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- A title page: backdrop and title art, match, details, Play/Resume, Episodes, My List, and More Like This below. -->
+<component name="DetailsScreen" extends="JFScreen">
+    <script type="text/brightscript" uri="pkg:/components/screens/DetailsScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
+    <children>
+        <Group id="page">
+            <Hero id="hero" fullScreen="true" overviewLines="4" />
+            <Label id="extras" translation="[120, 580]" width="1000" wrap="true" maxLines="2" color="0x808080FF">
+                <Font role="font" uri="font:SystemFontFile" size="24" />
+            </Label>
+            <LabelList id="buttons" translation="[120, 670]" itemSize="[560, 66]" itemSpacing="[0, 10]"
+                       color="0xFFFFFFFF" focusedColor="0x141414FF">
+                <Font role="font" uri="font:BoldSystemFontFile" size="30" />
+                <Font role="focusedFont" uri="font:BoldSystemFontFile" size="30" />
+            </LabelList>
+            <RowList id="similar" translation="[120, 1120]" itemComponentName="PosterItem"
+                     itemSize="[1800, 400]" numRows="1" rowItemSize="[[200, 300]]" rowItemSpacing="[[22, 0]]"
+                     showRowLabel="[true]" rowLabelOffset="[[0, 14]]" rowLabelColor="0xE5E5E5FF"
+                     drawFocusFeedback="false" rowFocusAnimationStyle="floatingFocus">
+                <Font role="rowLabelFont" uri="font:BoldSystemFontFile" size="30" />
+            </RowList>
+        </Group>
+        <BusySpinner id="spinner" translation="[928, 508]" visible="false" />
+        <Animation id="scroll" duration="0.3" easeFunction="outCubic">
+            <Vector2DFieldInterpolator id="scrollTo" key="[0.0, 1.0]" fieldToInterp="page.translation" />
+        </Animation>
+    </children>
+</component>

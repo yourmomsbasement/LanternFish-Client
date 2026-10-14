@@ -1,0 +1,28 @@
+{
+  "name": "lanternfish-client",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lanternfish TV clients: LG webOS, Samsung Tizen, Android TV / Fire TV / Google TV and Roku",
+  "license": "GPL-2.0-or-later",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "fetch-web": "node scripts/fetch-web.mjs",
+    "build:webos": "node scripts/package-web.mjs webos",
+    "build:tizen": "node scripts/package-web.mjs tizen",
+    "package:webos": "npm run build:webos && ares-package build/webos/app --outdir dist",
+    "build:roku": "node scripts/package-roku.mjs",
+    "lint:roku": "bsc --project roku/bsconfig.json",
+    "test": "node --test scripts/*.test.mjs && npm run test:roku",
+    "check": "node scripts/gen-themes.mjs --check && npm run lint:roku && npm test",
+    "test:roku": "node scripts/test-roku.mjs",
+    "themes": "node scripts/gen-themes.mjs"
+  },
+  "devDependencies": {
+    "@rokucommunity/brs": "^0.47.6",
+    "@webos-tools/cli": "^3.2.1",
+    "brighterscript": "^0.73.7"
+  }
+}

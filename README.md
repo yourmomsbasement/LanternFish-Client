@@ -1,0 +1,162 @@
+<p align="center"><img alt="Lanternfish" src="docs/banner.png"/></p>
+
+# Lanternfish
+
+Lanternfish brings your Jellyfin library to the TV: Roku, Android TV, Google TV, Fire TV, LG webOS and Samsung Tizen.
+The apps build on the [JellyFlix web client](https://github.com/yourmomsbasement/JellyFlix-Web) and work best with a Jellyfin server that has the [JellyFlix plugin](https://github.com/yourmomsbasement/JellyFlix-Plugin)
+installed. Without the plugin you still get a working Jellyfin client, just without profiles and recommendations.
+
+| Platform | Folder | How it works | Output |
+| --- | --- | --- | --- |
+| **Roku** | [`roku/`](roku) | A native SceneGraph/BrightScript channel that talks to the Jellyfin and JellyFlix plugin APIs directly | `lanternfish-roku-<version>.zip` (sideload or submit) |
+| **Android TV, Google TV, Fire TV** (and phones and tablets) | [`android/`](android) | A WebView app that loads the JellyFlix web client **from your server**, with NativeShell injected | APK |
+| **LG webOS** | [`webos/`](webos) | Packages the JellyFlix web client release with a webOS NativeShell | `.ipk` |
+| **Samsung Tizen** | [`tizen/`](tizen) | Packages the JellyFlix web client release with a Tizen NativeShell | `.wgt` (signed with your Samsung certificate) |
+
+## Artwork
+
+<p align="center">
+<img alt="App icon" src="tizen/icon.png" width="160"/>
+<img alt="Android TV banner" src="android/app/src/main/res/drawable-xhdpi/banner.png" width="284"/>
+<img alt="Roku channel poster" src="roku/images/channel-poster_fhd.png" width="213"/>
+</p>
+<p align="center"><img alt="Splash screen" src="webos/splash.png" width="640"/></p>
+
+The lanternfish's glowing lure grows out of the "L", in the Midnight theme's colors. Everything here (app icons,
+the Android TV banner, Roku posters, splash screens and these banners) is rendered by
+[`scripts/make-icons.sh`](scripts/make-icons.sh), which needs ImageMagick and the Inter font:
+
+```sh
+./scripts/make-icons.sh                                   # this repo's images
+WEB_ASSETS=../JellyFlix-Web/src/assets/img/lanternfish \
+WEB_DOCS=../JellyFlix-Web/docs ./scripts/make-icons.sh    # also the web client's logos, favicons and README banner
+```
+
+## Why two approaches
+
+The JellyFlix web client already has a TV mode built for remotes. Anything that can run a modern browser engine
+reuses it. Roku can't run HTML, so it gets its own native app.
+
+- **Android / Fire TV** loads `http(s)://<server>/web/` in a WebView. The JellyFlix plugin keeps that client up to
+  date, so the app picks up new web releases without an update. The app inlines
+  [`shared/nativeshell.js`](shared/nativeshell.js) into the server's `index.html`. The web client then knows it's on a TV
+  (TV layout, remote Back, exit), what the device decodes (HEVC, HDR10, Dolby Vision, DTS, TrueHD from `MediaCodecList`
+  and the display's HDR capabilities) and the device's name. The same APK has a Leanback launcher banner for
+  Android TV / Google TV and installs on Fire TV.
+- **webOS and Tizen** bundle a [JellyFlix-Web release](https://github.com/yourmomsbasement/JellyFlix-Web/releases)
+  (`jellyflix-web.zip`, checked against its SHA-256) into the app and load the platform adapter and NativeShell before
+  the client. This is the same model as the official Jellyfin Tizen app. It gives the client full access to the TV's
+  APIs: Tizen remote keys and Samsung's product/AV info, and webOS Luna for the model name and HDR / Dolby Vision
+  support. Rebuild the app to ship a newer web client; CI can do this for you.
+- **Roku** is a native channel covering:
+  - LAN server discovery and connecting to a server
+  - Quick Connect and password sign-in
+  - "Who's watching?" with PINs
+  - Home: a hero for the focused title over rows (Continue Watching, Next Up, Top Picks, My List, New, Because you watched…, Top Rated)
+  - Per-profile artwork
+  - Title pages with match %, Play/Resume, My List and More Like This
+  - Episodes, My List and search (including the plugin's "Matches your description")
+  - Playback through a device profile built from what the Roku and TV support, progress reporting, a fallback to transcoding, and next-episode autoplay
+  - A side menu and deep links
+
+## Themes
+
+Every client offers the same color themes, and each profile picks its own:
+
+| Theme | Accent | Notes |
+| --- | --- | --- |
+| **Midnight** | periwinkle `#7AA2FF` | The default |
+| Ember | orange `#FF8A3D` | |
+| Aurora | teal `#2ED3B7` | |
+| Classic Red | red `#E50914` | The original JellyFlix web client look. Its id stays `jellyflix` in the web client, so profiles that chose it keep it |
+
+- **Roku:** pick one in the side menu (Left on any row) under **Theme**. The choice is stored per profile on the device.
+- **Android, webOS and Tizen:** these use the web client's own setting, **Settings → Display → Theme**, which is stored
+  per profile on the server.
+
+The colors live in [`shared/themes.json`](shared/themes.json). `npm run themes` regenerates the Roku theme table
+(`roku/components/common/Themes.brs`) and the Android colors from it, and `npm run check` fails if they're stale. The
+web client keeps the same palettes in `src/themes/jellyflix/palettes.ts` in JellyFlix-Web.
+
+Roku components are written in the Classic Red colors (the `base` theme in `themes.json`). When a component starts,
+`JF_ApplyTheme` swaps each of those colors for the chosen theme's, keeping transparency. White is never swapped.
+
+## Building
+
+You need Node.js 20+ for everything, `zip`/`unzip`, and JDK 17 for Android. Run `npm ci` once.
+
+```sh
+npm run check            # Roku lint (BrighterScript) + build-script and Roku helper tests
+
+npm run build:roku       # → dist/lanternfish-roku-<version>.zip
+npm run package:webos    # → dist/app.lanternfish.tv_<version>_all.ipk   (downloads the latest JellyFlix web release)
+npm run build:tizen      # → build/tizen/app                          (then sign, see below)
+cd android && ./gradlew assembleRelease   # → android/app/build/outputs/apk/release/
+```
+
+`node scripts/package-web.mjs <webos|tizen>` takes `--tag web-2026.10.14.14` for a specific web release,
+`--zip path/to/jellyflix-web.zip` for a local web build, or `--skip-fetch` to reuse the last download.
+
+The version of every client comes from `package.json`.
+
+### CI
+
+[`.github/workflows/build.yml`](.github/workflows/build.yml) lints and tests, then builds all four platforms on every
+push and pull request and uploads the results as artifacts. Pushing a `v*` tag publishes them as a GitHub release.
+To get a signed Android release, add these secrets:
+
+- `LANTERNFISH_KEYSTORE_BASE64`
+- `LANTERNFISH_KEYSTORE_PASSWORD`
+- `LANTERNFISH_KEY_ALIAS`
+- `LANTERNFISH_KEY_PASSWORD`
+
+## Installing
+
+- **Roku:** enable developer mode (Home ×3, Up ×2, Right, Left, Right, Left, Right). Open `http://<roku-ip>` and
+  upload `lanternfish-roku-<version>.zip` in the Development Application Installer.
+- **Android TV / Google TV:** `adb install app-release.apk`, or sideload with a file manager.
+- **Fire TV:** turn on *Developer options → Install unknown apps*, then `adb connect <fire-tv-ip>` and `adb install …`,
+  or use Downloader.
+- **LG webOS:** turn on Developer Mode (LG's Developer Mode app). Then run
+  `npx ares-setup-device` and `npx ares-install -d <tv> dist/app.lanternfish.tv_*.ipk`.
+- **Samsung Tizen:** install Tizen Studio with the TV extensions and create a Samsung certificate. Then run
+  `tizen build-web -- build/tizen/app`, `tizen package -t wgt -s <profile> -- build/tizen/app/.buildResult`, and
+  `tizen install -n Lanternfish.wgt -t <tv>`.
+
+On first launch each app asks for your server. It looks for servers on the local network and also accepts an
+address typed in, e.g. `192.168.1.10:8096` or `https://jellyfin.example.com`.
+
+## Layout
+
+| Path | What |
+| --- | --- |
+| `shared/nativeshell.js` | The `window.NativeShell` jellyfin-web expects, built from a small per-platform adapter (`window.LanternfishPlatform`) |
+| `webos/`, `tizen/` | Manifests, icons and each platform's adapter (`lanternfish-platform.js`) |
+| `android/` | Kotlin app: `MainActivity` (WebView, Back handling, index injection), `ConnectActivity` (server picker), `NativeBridge` (JS ↔ Android), `DeviceCapabilities`, `ServerDiscovery` |
+| `roku/source/main.brs` | Channel entry point and deep links |
+| `roku/components/MainScene.*` | Screen stack and navigation |
+| `roku/components/screens/` | Connect, Login, Profiles, Home, Details, Episodes, Grid (My List), Search, Player |
+| `roku/components/common/` | Shared helpers (`Utils.brs`) and the Roku device profile (`DeviceProfile.brs`) |
+| `roku/components/tasks/` | HTTP (`ApiTask`) and UDP server discovery (`DiscoveryTask`) |
+| `scripts/` | Build scripts (`fetch-web`, `package-web`, `package-roku`, `make-icons.sh`) and their tests |
+
+## Status
+
+What has been verified:
+
+- **Roku:** the channel compiles cleanly with BrighterScript. Its helper functions pass tests in a BrightScript
+  interpreter.
+- **webOS and Tizen:** both packages build from the real JellyFlix web release. In Chromium with a TV user agent, they
+  boot into the TV layout with NativeShell active.
+- **Android:** the address-parsing tests pass on the JVM. The APK itself is built only by CI, because the Android SDK
+  wasn't available where this was written.
+
+None of the apps has run on a real device yet. Before publishing to a store, check:
+
+- remote-key edge cases on each platform
+- Roku `StandardKeyboardDialog` and `StandardPinPadDialog`, which need Roku OS 11+
+- the webOS `requiredACG` entries for LG's submission check
+- direct play of HDR and Dolby Vision files on each device
+
+Not yet built: the end-credit companion on Roku, requests through Seerr on Roku, Android TV home-screen channels
+(Watch Next), and an ExoPlayer-based player on Android.

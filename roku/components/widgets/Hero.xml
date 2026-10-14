@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- The top of home and title pages: the backdrop fading into the page, title art (or the title), details and synopsis. -->
+<component name="Hero" extends="Group">
+    <interface>
+        <!-- A ContentNode made by JF_ItemNode -->
+        <field id="content" type="node" onChange="onContent" />
+        <field id="match" type="integer" value="-1" onChange="onContent" />
+        <field id="overviewLines" type="integer" value="3" onChange="onLayout" />
+        <field id="fullScreen" type="boolean" value="false" onChange="onLayout" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/widgets/Hero.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
+    <children>
+        <Poster id="backdrop" translation="[576, 0]" width="1344" height="756" loadWidth="1344" loadHeight="756" loadDisplayMode="scaleToZoom" />
+        <Poster id="fadeLeft" uri="pkg:/images/fade-left.png" blendColor="0x141414FF" translation="[576, 0]" width="900" height="756" />
+        <Poster id="fadeBottom" uri="pkg:/images/fade-bottom.png" blendColor="0x141414FF" translation="[0, 456]" width="1920" height="300" />
+        <Poster id="logo" translation="[120, 110]" width="640" height="220" loadDisplayMode="scaleToFit" />
+        <Label id="title" translation="[120, 180]" width="1000" wrap="true" maxLines="2" color="0xFFFFFFFF">
+            <Font role="font" uri="font:BoldSystemFontFile" size="72" />
+        </Label>
+        <Label id="subtitle" translation="[120, 350]" width="1000" color="0xFFFFFFFF">
+            <Font role="font" uri="font:BoldSystemFontFile" size="30" />
+        </Label>
+        <Group id="metaRow" translation="[120, 352]">
+            <Label id="match" color="0x46D369FF">
+                <Font role="font" uri="font:BoldSystemFontFile" size="28" />
+            </Label>
+            <Label id="meta" color="0xD0D0D0FF">
+                <Font role="font" uri="font:SystemFontFile" size="28" />
+            </Label>
+        </Group>
+        <Label id="overview" translation="[120, 404]" width="860" wrap="true" maxLines="3" color="0xD0D0D0FF">
+            <Font role="font" uri="font:SystemFontFile" size="28" />
+        </Label>
+        <Timer id="debounce" duration="0.25" />
+    </children>
+</component>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- An episode row: still, "3. Title", runtime, a short synopsis and how far it's been watched. -->
+<component name="EpisodeItem" extends="Group">
+    <interface>
+        <field id="itemContent" type="node" onChange="onContent" />
+        <field id="focusPercent" type="float" onChange="onFocus" />
+        <field id="listHasFocus" type="boolean" onChange="onFocus" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/items/EpisodeItem.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
+    <children>
+        <Rectangle id="highlight" width="1180" height="200" color="0x333333FF" opacity="0" />
+        <Rectangle id="placeholder" width="320" height="180" translation="[10, 10]" color="0x2A2A2AFF" />
+        <Poster id="still" width="320" height="180" loadWidth="320" loadHeight="180" translation="[10, 10]" loadDisplayMode="scaleToZoom" />
+        <Rectangle id="track" width="300" height="5" translation="[20, 172]" color="0x5A5A5AFF" visible="false" />
+        <Rectangle id="bar" height="5" translation="[20, 172]" color="0xE50914FF" visible="false" />
+        <Label id="title" width="640" translation="[360, 20]" color="0xFFFFFFFF">
+            <Font role="font" uri="font:BoldSystemFontFile" size="28" />
+        </Label>
+        <Label id="runtime" width="160" translation="[1000, 22]" horizAlign="right" color="0xB3B3B3FF">
+            <Font role="font" uri="font:SystemFontFile" size="24" />
+        </Label>
+        <Label id="overview" width="800" height="110" translation="[360, 66]" wrap="true" maxLines="3" color="0xB3B3B3FF">
+            <Font role="font" uri="font:SystemFontFile" size="22" />
+        </Label>
+    </children>
+</component>

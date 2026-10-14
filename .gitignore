@@ -1,0 +1,22 @@
+node_modules/
+build/
+dist/
+.cache/
+*.ipk
+*.wgt
+*.zip
+
+# Android
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/*.keystore
+android/keystore.properties
+.idea/
+*.iml
+
+# Tizen signing
+tizen/.sign/
+tizen/.buildResult/
+out/

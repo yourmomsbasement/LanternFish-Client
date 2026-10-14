@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- What MainScene expects of every screen. Screens extend this and observe `params` (load) and `resumed`. -->
+<component name="JFScreen" extends="Group">
+    <interface>
+        <!-- Set once, right after the screen is shown -->
+        <field id="params" type="assocarray" />
+        <!-- { screen: "DetailsScreen", params: {}, reset: false } -->
+        <field id="navigate" type="assocarray" alwaysNotify="true" />
+        <field id="close" type="boolean" alwaysNotify="true" />
+        <!-- Set when the screen above this one closed -->
+        <field id="resumed" type="boolean" alwaysNotify="true" />
+    </interface>
+</component>

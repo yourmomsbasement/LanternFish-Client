@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- One HTTP request to the Jellyfin server (roUrlTransfer only runs in a Task). See JF_Request in Utils.brs. -->
+<component name="ApiTask" extends="Task">
+    <interface>
+        <!-- { method, path, query: {}, body: {} | invalid, baseUrl?: "http://other-server", timeoutMs? } -->
+        <field id="request" type="assocarray" />
+        <!-- { ok, code, json, error } -->
+        <field id="response" type="assocarray" />
+        <field id="tag" type="string" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/tasks/ApiTask.brs" />
+    <script type="text/brightscript" uri="pkg:/components/tasks/Http.brs" />
+</component>

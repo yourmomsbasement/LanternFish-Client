@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Holds the stack of screens: each screen asks for the next through its `navigate` field and to go back through `close`. -->
+<component name="MainScene" extends="Scene">
+    <interface>
+        <field id="started" type="boolean" onChange="onStarted" />
+        <!-- { contentId, mediaType } from a launch or roInput deep link -->
+        <field id="deepLink" type="assocarray" onChange="onDeepLink" />
+        <field id="exitApp" type="boolean" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
+    <children>
+        <Rectangle id="background" width="1920" height="1080" color="0x141414FF" />
+        <Group id="screens" />
+    </children>
+</component>

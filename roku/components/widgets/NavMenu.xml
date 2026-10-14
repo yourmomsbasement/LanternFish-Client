@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- The side menu that slides in when Left is pressed at the start of a row (as in the web client's TV mode). -->
+<component name="NavMenu" extends="Group">
+    <interface>
+        <!-- The id of the chosen entry: search, home, mylist, profiles, signout, server -->
+        <field id="selected" type="string" alwaysNotify="true" />
+        <field id="profileName" type="string" onChange="onProfileName" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/widgets/NavMenu.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
+    <children>
+        <Poster id="shade" uri="pkg:/images/fade-left.png" blendColor="0x141414FF" width="900" height="1080" />
+        <Rectangle width="420" height="1080" color="0x141414F0" />
+        <Label id="profile" translation="[80, 90]" width="320" color="0xB3B3B3FF">
+            <Font role="font" uri="font:SystemFontFile" size="26" />
+        </Label>
+        <LabelList id="list" translation="[80, 300]" itemSize="[320, 72]" itemSpacing="[0, 8]"
+                   color="0xB3B3B3FF" focusedColor="0x141414FF" focusBitmapBlendColor="0xFFFFFFFF">
+            <Font role="font" uri="font:BoldSystemFontFile" size="32" />
+            <Font role="focusedFont" uri="font:BoldSystemFontFile" size="32" />
+        </LabelList>
+    </children>
+</component>

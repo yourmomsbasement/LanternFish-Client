@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Home: the focused title fills the top of the screen above rows of posters, as in the web client's TV mode. -->
+<component name="HomeScreen" extends="JFScreen">
+    <script type="text/brightscript" uri="pkg:/components/screens/HomeScreen.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
+    <children>
+        <Hero id="hero" />
+        <RowList id="rows" translation="[120, 560]" itemComponentName="PosterItem"
+                 itemSize="[1800, 390]" itemSpacing="[0, 30]" numRows="3"
+                 rowItemSize="[[200, 300]]" rowItemSpacing="[[22, 0]]"
+                 showRowLabel="[true]" rowLabelOffset="[[0, 14]]" rowLabelColor="0xE5E5E5FF"
+                 drawFocusFeedback="false" rowFocusAnimationStyle="floatingFocus" vertFocusAnimationStyle="fixedFocus">
+            <Font role="rowLabelFont" uri="font:BoldSystemFontFile" size="30" />
+        </RowList>
+        <BusySpinner id="spinner" translation="[928, 700]" visible="false" />
+        <Label id="empty" translation="[120, 640]" width="1600" wrap="true" color="0xB3B3B3FF" visible="false">
+            <Font role="font" uri="font:SystemFontFile" size="30" />
+        </Label>
+        <NavMenu id="menu" visible="false" />
+    </children>
+</component>
