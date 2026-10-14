@@ -1,4 +1,5 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.list = m.top.findNode("list")
     m.profile = m.top.findNode("profile")
     m.entries = [
@@ -6,6 +7,7 @@ sub init()
         { id: "home", title: "Home" },
         { id: "mylist", title: "My List" },
         { id: "profiles", title: "Switch Profile" },
+        { id: "theme", title: "Theme" },
         { id: "signout", title: "Sign Out" },
         { id: "server", title: "Change Server" }
     ]

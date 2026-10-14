@@ -7,6 +7,8 @@
         <field id="listHasFocus" type="boolean" onChange="onFocus" />
     </interface>
     <script type="text/brightscript" uri="pkg:/components/items/EpisodeItem.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
     <children>
         <Rectangle id="highlight" width="1180" height="200" color="0x333333FF" opacity="0" />
         <Rectangle id="placeholder" width="320" height="180" translation="[10, 10]" color="0x2A2A2AFF" />

@@ -3,18 +3,6 @@
 
 ' ---- Colors and text ------------------------------------------------------------------------------------------------
 
-function JF_Red() as String
-    return "0xE50914FF"
-end function
-
-function JF_Green() as String
-    return "0x46D369FF"
-end function
-
-function JF_Muted() as String
-    return "0xB3B3B3FF"
-end function
-
 ' "#E50914" (the web client's avatar colors) -> "0xE50914FF"
 function JF_HexColor(hex as Dynamic, fallback = "0xE50914FF" as String) as String
     if hex = invalid then return fallback
@@ -262,6 +250,7 @@ sub JF_SaveSession(auth as Object)
     m.global.artwork = {}
     JF_RegistryWrite("token", auth.AccessToken)
     JF_RegistryWrite("userId", auth.User.Id)
+    JF_LoadTheme(auth.User.Id)
 end sub
 
 sub JF_ClearSession()

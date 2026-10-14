@@ -16,6 +16,7 @@ sub Main(args as Dynamic)
         token: "",
         userId: "",
         artwork: {},
+        theme: {},
         deviceId: info.GetChannelClientId(),
         deviceName: DeviceName(info),
         appVersion: appInfo.GetVersion()

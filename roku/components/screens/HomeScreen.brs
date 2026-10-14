@@ -12,11 +12,12 @@ function homeRows() as Object
 end function
 
 sub init()
+    JF_ApplyTheme(m.top)
     m.hero = m.top.findNode("hero")
     m.rows = m.top.findNode("rows")
     m.menu = m.top.findNode("menu")
     m.spinner = m.top.findNode("spinner")
-    m.spinner.poster.uri = "pkg:/images/spinner.png"
+    JF_StyleSpinner(m.spinner)
     m.empty = m.top.findNode("empty")
     m.focusTarget = m.rows
     m.results = {}
@@ -250,12 +251,42 @@ sub onMenu()
         m.top.navigate = { screen: "GridScreen", params: { title: "My List", query: { filters: "IsFavorite", sortBy: "DateCreated", sortOrder: "Descending" } } }
     else if choice = "profiles"
         m.top.navigate = { screen: "ProfilesScreen", reset: true }
+    else if choice = "theme"
+        chooseTheme()
     else if choice = "signout"
         JF_Post("/Sessions/Logout", invalid, "onSignedOut")
     else if choice = "server"
         JF_ClearSession()
         m.top.navigate = { screen: "ConnectScreen", reset: true }
     end if
+end sub
+
+' Each profile picks its own colors; the page is rebuilt in the new ones
+sub chooseTheme()
+    m.themes = JF_ThemeList()
+    current = m.global.theme
+    names = []
+    for each theme in m.themes
+        name = theme.name
+        if current <> invalid and current.id = theme.id then name = "✓  " + name
+        names.Push(name)
+    end for
+    dialog = CreateObject("roSGNode", "StandardMessageDialog")
+    dialog.title = "Theme"
+    dialog.message = ["Pick the colors for this profile."]
+    dialog.buttons = names
+    dialog.observeFieldScoped("buttonSelected", "onThemeChosen")
+    dialog.observeFieldScoped("wasClosed", "JF_CloseDialog")
+    m.top.getScene().dialog = dialog
+end sub
+
+sub onThemeChosen()
+    dialog = m.top.getScene().dialog
+    dialog.close = true
+    theme = m.themes[dialog.buttonSelected]
+    if m.global.theme <> invalid and m.global.theme.id = theme.id then return
+    JF_SaveTheme(m.global.userId, theme.id)
+    m.top.navigate = { screen: "HomeScreen", reset: true }
 end sub
 
 sub onSignedOut()

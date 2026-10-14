@@ -3,6 +3,8 @@
 <component name="EpisodesScreen" extends="JFScreen">
     <script type="text/brightscript" uri="pkg:/components/screens/EpisodesScreen.brs" />
     <script type="text/brightscript" uri="pkg:/components/common/Utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
     <children>
         <Poster id="backdrop" width="1920" height="1080" loadWidth="1920" loadHeight="1080" loadDisplayMode="scaleToZoom" opacity="0.25" />
         <Label id="title" translation="[120, 70]" width="1680" color="0xFFFFFFFF">

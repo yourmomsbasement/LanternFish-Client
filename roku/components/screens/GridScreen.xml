@@ -3,6 +3,8 @@
 <component name="GridScreen" extends="JFScreen">
     <script type="text/brightscript" uri="pkg:/components/screens/GridScreen.brs" />
     <script type="text/brightscript" uri="pkg:/components/common/Utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
     <children>
         <Label id="title" translation="[120, 70]" color="0xFFFFFFFF">
             <Font role="font" uri="font:BoldSystemFontFile" size="52" />

@@ -2,6 +2,8 @@ sub init()
     m.top.backgroundURI = ""
     m.top.backgroundColor = "0x141414FF"
     m.screens = m.top.findNode("screens")
+    m.background = m.top.findNode("background")
+    m.global.observeField("theme", "onThemeChanged")
     m.stack = []
     m.pendingDeepLink = invalid
 end sub
@@ -10,6 +12,7 @@ sub onStarted()
     m.global.server = JF_RegistryRead("server")
     m.global.token = JF_RegistryRead("token")
     m.global.userId = JF_RegistryRead("userId")
+    JF_LoadTheme(m.global.userId)
 
     if m.global.server = ""
         show("ConnectScreen", {}, true)
@@ -19,6 +22,13 @@ sub onStarted()
         ' "Who's watching?" every time the app opens, as in the web client
         show("ProfilesScreen", { startup: true }, true)
     end if
+end sub
+
+' The background and the system dialogs follow the theme; screens recolor themselves when they're created
+sub onThemeChanged()
+    m.background.color = JF_Color("background")
+    m.top.backgroundColor = JF_Color("background")
+    m.top.palette = JF_DialogPalette()
 end sub
 
 ' ---- Navigation -----------------------------------------------------------------------------------------------------

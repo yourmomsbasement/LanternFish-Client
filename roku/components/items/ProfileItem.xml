@@ -7,6 +7,8 @@
         <field id="gridHasFocus" type="boolean" onChange="onFocus" />
     </interface>
     <script type="text/brightscript" uri="pkg:/components/items/ProfileItem.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
     <children>
         <Rectangle id="frame" width="230" height="230" translation="[-5, -5]" color="0xFFFFFFFF" opacity="0" />
         <Rectangle id="avatar" width="220" height="220" color="0xE50914FF" />

@@ -1,7 +1,8 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.video = m.top.findNode("video")
     m.spinner = m.top.findNode("spinner")
-    m.spinner.poster.uri = "pkg:/images/spinner.png"
+    JF_StyleSpinner(m.spinner)
     m.progress = m.top.findNode("progress")
     m.progress.observeField("fire", "reportProgress")
     m.video.observeField("state", "onState")

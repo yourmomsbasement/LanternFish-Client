@@ -1,4 +1,5 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.frame = m.top.findNode("frame")
     m.avatar = m.top.findNode("avatar")
     m.initial = m.top.findNode("initial")
@@ -29,5 +30,5 @@ sub onFocus()
     amount = m.top.focusPercent
     if not m.top.gridHasFocus then amount = 0
     m.frame.opacity = amount
-    if amount > 0.5 then m.name.color = "0xFFFFFFFF" else m.name.color = "0xB3B3B3FF"
+    if amount > 0.5 then m.name.color = "0xFFFFFFFF" else m.name.color = JF_Color("muted")
 end sub

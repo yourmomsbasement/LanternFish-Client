@@ -1,0 +1,83 @@
+{
+    "$comment": "Color themes shared by every client. scripts/gen-themes.mjs turns this into the Roku theme table and the Android colors; the web client (JellyFlix-Web, src/themes) mirrors it. `base` is the palette the Roku XML is written in: its colors are swapped for the chosen theme's at runtime. White is never themed (all themes are dark).",
+    "default": "midnight",
+    "base": "classic",
+    "tokens": {
+        "background": "Page background",
+        "surface": "Cards, placeholders and input fields",
+        "highlight": "Focused rows in lists",
+        "track": "The unplayed part of progress bars",
+        "accent": "Wordmark, progress, spinners",
+        "heading": "Row titles",
+        "textSecondary": "Synopses and details",
+        "muted": "Labels and unfocused menu entries",
+        "faint": "Small print",
+        "match": "The match percentage"
+    },
+    "themes": [
+        {
+            "id": "midnight",
+            "name": "Midnight",
+            "colors": {
+                "background": "#0D1117",
+                "surface": "#1C2230",
+                "highlight": "#2A3242",
+                "track": "#4A5468",
+                "accent": "#7AA2FF",
+                "heading": "#E3E8F2",
+                "textSecondary": "#D3D8E2",
+                "muted": "#A9B1C2",
+                "faint": "#7F889A",
+                "match": "#4CD9A0"
+            }
+        },
+        {
+            "id": "ember",
+            "name": "Ember",
+            "colors": {
+                "background": "#14100E",
+                "surface": "#2A211C",
+                "highlight": "#3A2E27",
+                "track": "#5E4C40",
+                "accent": "#FF8A3D",
+                "heading": "#F2E8E2",
+                "textSecondary": "#E2D6CF",
+                "muted": "#BBADA4",
+                "faint": "#8D8077",
+                "match": "#9BD96B"
+            }
+        },
+        {
+            "id": "aurora",
+            "name": "Aurora",
+            "colors": {
+                "background": "#0A1413",
+                "surface": "#16282A",
+                "highlight": "#21383A",
+                "track": "#3F5E5E",
+                "accent": "#2ED3B7",
+                "heading": "#E0F0EE",
+                "textSecondary": "#CFE3E0",
+                "muted": "#A1BAB7",
+                "faint": "#74908C",
+                "match": "#B7E36B"
+            }
+        },
+        {
+            "id": "classic",
+            "name": "Classic Red",
+            "colors": {
+                "background": "#141414",
+                "surface": "#2A2A2A",
+                "highlight": "#333333",
+                "track": "#5A5A5A",
+                "accent": "#E50914",
+                "heading": "#E5E5E5",
+                "textSecondary": "#D0D0D0",
+                "muted": "#B3B3B3",
+                "faint": "#808080",
+                "match": "#46D369"
+            }
+        }
+    ]
+}

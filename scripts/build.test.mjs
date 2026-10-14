@@ -34,3 +34,15 @@ test('the Roku manifest takes the client version', () => {
     const manifest = 'title=JellyFlix\nmajor_version=0\nminor_version=1\nbuild_version=0\n';
     assert.equal(setManifestVersion(manifest, '1.4.12'), 'title=JellyFlix\nmajor_version=1\nminor_version=4\nbuild_version=12\n');
 });
+
+test('themes are complete and the generated code is up to date', async () => {
+    const { generate, validate } = await import('./gen-themes.mjs');
+    await generate({ check: true });
+    const theme = (id, accent) => ({ id, name: id, colors: { background: '#000001', accent } });
+    const config = { default: 'a', base: 'a', tokens: { background: '', accent: '' }, themes: [theme('a', '#E50914')] };
+    validate(config);
+    assert.throws(() => validate({ ...config, themes: [theme('a', '#E50914'), theme('a', '#E50914')] }), /twice/);
+    assert.throws(() => validate({ ...config, themes: [theme('a', 'red')] }), /#RRGGBB/);
+    assert.throws(() => validate({ ...config, themes: [theme('a', '#000001')] }), /both/);
+    assert.throws(() => validate({ ...config, default: 'b' }), /No theme "b"/);
+});

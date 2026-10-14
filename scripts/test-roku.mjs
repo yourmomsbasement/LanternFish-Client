@@ -9,7 +9,9 @@ const roku = join(ROOT, 'roku');
 const sources = [
     'components/common/Utils.brs',
     'components/common/DeviceProfile.brs',
-    'components/screens/ConnectScreen.brs'
+    'components/screens/ConnectScreen.brs',
+    'components/common/Theme.brs',
+    'components/common/Themes.brs'
 ].map((file) => join(roku, file));
 
 let failed = false;

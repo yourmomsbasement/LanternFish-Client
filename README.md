@@ -40,6 +40,28 @@ reuses it. Roku can't run HTML, so it gets its own native app.
   - Playback through a device profile built from what the Roku and TV support, progress reporting, a fallback to transcoding, and next-episode autoplay
   - A side menu and deep links
 
+## Themes
+
+Every client offers the same color themes, and each profile picks its own:
+
+| Theme | Accent | Notes |
+| --- | --- | --- |
+| **Midnight** | periwinkle `#7AA2FF` | The default |
+| Ember | orange `#FF8A3D` | |
+| Aurora | teal `#2ED3B7` | |
+| Classic Red | red `#E50914` | The original JellyFlix look. Its id stays `jellyflix` in the web client, so profiles that chose it keep it |
+
+- **Roku:** pick one in the side menu (Left on any row) under **Theme**. The choice is stored per profile on the device.
+- **Android, webOS and Tizen:** these use the web client's own setting, **Settings → Display → Theme**, which is stored
+  per profile on the server.
+
+The colors live in [`shared/themes.json`](shared/themes.json). `npm run themes` regenerates the Roku theme table
+(`roku/components/common/Themes.brs`) and the Android colors from it, and `npm run check` fails if they're stale. The
+web client keeps the same palettes in `src/themes/jellyflix/palettes.ts` in JellyFlix-Web.
+
+Roku components are written in the Classic Red colors (the `base` theme in `themes.json`). When a component starts,
+`JF_ApplyTheme` swaps each of those colors for the chosen theme's, keeping transparency. White is never swapped.
+
 ## Building
 
 You need Node.js 20+ for everything, `zip`/`unzip`, and JDK 17 for Android. Run `npm ci` once.

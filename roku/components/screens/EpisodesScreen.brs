@@ -1,10 +1,11 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.backdrop = m.top.findNode("backdrop")
     m.title = m.top.findNode("title")
     m.seasonList = m.top.findNode("seasons")
     m.episodeList = m.top.findNode("episodes")
     m.spinner = m.top.findNode("spinner")
-    m.spinner.poster.uri = "pkg:/images/spinner.png"
+    JF_StyleSpinner(m.spinner)
     m.debounce = m.top.findNode("debounce")
     m.focusTarget = m.seasonList
     m.seasons = []

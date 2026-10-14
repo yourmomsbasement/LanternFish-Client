@@ -11,6 +11,8 @@
         <field id="gridHasFocus" type="boolean" onChange="onFocus" />
     </interface>
     <script type="text/brightscript" uri="pkg:/components/items/PosterItem.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
     <children>
         <Rectangle id="frame" color="0xFFFFFFFF" opacity="0" translation="[-5, -5]" />
         <Rectangle id="placeholder" color="0x2A2A2AFF" />

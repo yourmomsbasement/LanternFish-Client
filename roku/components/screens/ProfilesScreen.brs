@@ -1,9 +1,10 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.grid = m.top.findNode("grid")
     m.actions = m.top.findNode("actions")
     m.status = m.top.findNode("status")
     m.spinner = m.top.findNode("spinner")
-    m.spinner.poster.uri = "pkg:/images/spinner.png"
+    JF_StyleSpinner(m.spinner)
     m.focusTarget = m.grid
 
     content = CreateObject("roSGNode", "ContentNode")
@@ -61,7 +62,7 @@ sub onHousehold(event as Object)
         node = content.createChild("ContentNode")
         node.addFields({
             profileId: profile.Id,
-            avatarColor: JF_HexColor(profile.AvatarColor),
+            avatarColor: JF_HexColor(profile.AvatarColor, JF_Color("accent")),
             isKids: JF_IsTrue(profile.IsKids),
             hasPin: JF_IsTrue(profile.HasPin)
         })

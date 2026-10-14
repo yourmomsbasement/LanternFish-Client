@@ -1,11 +1,12 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.page = m.top.findNode("page")
     m.hero = m.top.findNode("hero")
     m.extras = m.top.findNode("extras")
     m.buttons = m.top.findNode("buttons")
     m.similar = m.top.findNode("similar")
     m.spinner = m.top.findNode("spinner")
-    m.spinner.poster.uri = "pkg:/images/spinner.png"
+    JF_StyleSpinner(m.spinner)
     m.scroll = m.top.findNode("scroll")
     m.scrollTo = m.top.findNode("scrollTo")
     m.focusTarget = m.buttons

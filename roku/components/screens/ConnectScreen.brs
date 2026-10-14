@@ -1,8 +1,9 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.options = m.top.findNode("options")
     m.status = m.top.findNode("status")
     m.spinner = m.top.findNode("spinner")
-    m.spinner.poster.uri = "pkg:/images/spinner.png"
+    JF_StyleSpinner(m.spinner)
     m.servers = []
     m.candidates = []
     m.busy = false

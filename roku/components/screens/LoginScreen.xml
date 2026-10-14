@@ -3,6 +3,8 @@
 <component name="LoginScreen" extends="JFScreen">
     <script type="text/brightscript" uri="pkg:/components/screens/LoginScreen.brs" />
     <script type="text/brightscript" uri="pkg:/components/common/Utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
     <children>
         <Label text="JELLYFLIX" translation="[120, 90]" color="0xE50914FF">
             <Font role="font" uri="font:BoldSystemFontFile" size="64" />

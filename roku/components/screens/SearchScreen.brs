@@ -1,4 +1,5 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.keyboard = m.top.findNode("keyboard")
     m.hint = m.top.findNode("hint")
     m.results = m.top.findNode("results")

@@ -1,4 +1,5 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.backdrop = m.top.findNode("backdrop")
     m.fadeLeft = m.top.findNode("fadeLeft")
     m.fadeBottom = m.top.findNode("fadeBottom")

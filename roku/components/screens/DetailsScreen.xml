@@ -3,10 +3,12 @@
 <component name="DetailsScreen" extends="JFScreen">
     <script type="text/brightscript" uri="pkg:/components/screens/DetailsScreen.brs" />
     <script type="text/brightscript" uri="pkg:/components/common/Utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
+    <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
     <children>
         <Group id="page">
             <Hero id="hero" fullScreen="true" overviewLines="4" />
-            <Label id="extras" translation="[120, 580]" width="1000" wrap="true" maxLines="2" color="0x9A9A9AFF">
+            <Label id="extras" translation="[120, 580]" width="1000" wrap="true" maxLines="2" color="0x808080FF">
                 <Font role="font" uri="font:SystemFontFile" size="24" />
             </Label>
             <LabelList id="buttons" translation="[120, 670]" itemSize="[560, 66]" itemSpacing="[0, 10]"

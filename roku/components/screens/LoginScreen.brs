@@ -1,4 +1,5 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.heading = m.top.findNode("heading")
     m.code = m.top.findNode("code")
     m.qcStatus = m.top.findNode("qcStatus")

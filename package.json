@@ -16,8 +16,9 @@
     "build:roku": "node scripts/package-roku.mjs",
     "lint:roku": "bsc --project roku/bsconfig.json",
     "test": "node --test scripts/*.test.mjs && npm run test:roku",
-    "check": "npm run lint:roku && npm test",
-    "test:roku": "node scripts/test-roku.mjs"
+    "check": "node scripts/gen-themes.mjs --check && npm run lint:roku && npm test",
+    "test:roku": "node scripts/test-roku.mjs",
+    "themes": "node scripts/gen-themes.mjs"
   },
   "devDependencies": {
     "@rokucommunity/brs": "^0.47.6",

@@ -1,9 +1,10 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.title = m.top.findNode("title")
     m.grid = m.top.findNode("grid")
     m.empty = m.top.findNode("empty")
     m.spinner = m.top.findNode("spinner")
-    m.spinner.poster.uri = "pkg:/images/spinner.png"
+    JF_StyleSpinner(m.spinner)
     m.grid.observeField("itemSelected", "onSelected")
     m.top.observeField("focusedChild", "onFocusChanged")
     m.top.observeField("params", "load")

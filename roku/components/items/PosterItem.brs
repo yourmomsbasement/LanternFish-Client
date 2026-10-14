@@ -1,4 +1,5 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.frame = m.top.findNode("frame")
     m.placeholder = m.top.findNode("placeholder")
     m.fallback = m.top.findNode("fallback")

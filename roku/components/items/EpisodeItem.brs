@@ -1,4 +1,5 @@
 sub init()
+    JF_ApplyTheme(m.top)
     m.highlight = m.top.findNode("highlight")
     m.still = m.top.findNode("still")
     m.track = m.top.findNode("track")

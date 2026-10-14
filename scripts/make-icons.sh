@@ -45,8 +45,8 @@ wide 1920 1080 roku/images/splash_fhd.png
 wide 1280 720 roku/images/splash_hd.png
 icon 336 roku/images/logo.png
 
-# Roku: the fades that blend backdrops into the page, and the loading spinner
-convert -size 1080x1344 gradient:"${BG}FF"-"${BG}00" -rotate -90 PNG32:roku/images/fade-left.png
-convert -size 1920x540 gradient:"${BG}00"-"${BG}FF" PNG32:roku/images/fade-bottom.png
-convert -size 1920x300 gradient:'#000000CC'-'#00000000' PNG32:roku/images/fade-top.png
-convert -size 64x64 xc:none -fill none -stroke "$RED" -strokewidth 7 -draw "arc 6,6 58,58 0,270" PNG32:roku/images/spinner.png
+# Roku: the fades that blend backdrops into the page, and the loading spinner. They're white; the app tints them with
+# the theme's background and accent (Poster.blendColor)
+convert -size 1080x1344 gradient:'#FFFFFFFF'-'#FFFFFF00' -rotate -90 PNG32:roku/images/fade-left.png
+convert -size 1920x540 gradient:'#FFFFFF00'-'#FFFFFFFF' PNG32:roku/images/fade-bottom.png
+convert -size 64x64 xc:none -fill none -stroke white -strokewidth 7 -draw "arc 6,6 58,58 0,270" PNG32:roku/images/spinner.png
