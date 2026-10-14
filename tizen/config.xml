@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets"
-        id="http://jellyflix.app/tizen" version="{{version}}" viewmodes="maximized">
-    <tizen:application id="JlyFlxTV01.JellyFlix" package="JlyFlxTV01" required_version="4.0"/>
-    <name>JellyFlix</name>
-    <description>A Netflix-style client for Jellyfin servers running the JellyFlix plugin.</description>
-    <author href="https://github.com/yourmomsbasement">JellyFlix</author>
+        id="http://lanternfish.app/tizen" version="{{version}}" viewmodes="maximized">
+    <tizen:application id="LntrnFsh01.Lanternfish" package="LntrnFsh01" required_version="4.0"/>
+    <name>Lanternfish</name>
+    <description>A TV app for Jellyfin servers, with profiles and recommendations from the JellyFlix plugin.</description>
+    <author href="https://github.com/yourmomsbasement">Lanternfish</author>
     <icon src="icon.png"/>
     <content src="index.html"/>
     <access origin="*" subdomains="true"/>

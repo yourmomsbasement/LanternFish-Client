@@ -6,7 +6,7 @@
     <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
     <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
     <children>
-        <Label text="JELLYFLIX" translation="[120, 90]" color="0xE50914FF">
+        <Label text="Lanternfish" translation="[120, 90]" color="0xE50914FF">
             <Font role="font" uri="font:BoldSystemFontFile" size="64" />
         </Label>
         <Label id="heading" text="Sign in" translation="[120, 230]" width="1680" color="0xFFFFFFFF">
@@ -18,7 +18,7 @@
                 <Font role="font" uri="font:BoldSystemFontFile" size="34" />
             </Label>
             <Label id="qcHelp" translation="[0, 56]" width="900" wrap="true" color="0xB3B3B3FF"
-                   text="On your phone or computer, open JellyFlix, choose your profile picture → Quick Connect, and enter this code:">
+                   text="On your phone or computer, open your server in a browser, choose your profile picture → Quick Connect, and enter this code:">
                 <Font role="font" uri="font:SystemFontFile" size="28" />
             </Label>
             <Rectangle translation="[0, 180]" width="560" height="150" color="0x2A2A2AFF" />

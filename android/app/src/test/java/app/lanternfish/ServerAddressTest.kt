@@ -1,4 +1,4 @@
-package app.jellyflix.android
+package app.lanternfish
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

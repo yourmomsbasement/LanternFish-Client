@@ -19,7 +19,7 @@ end function
 
 ' Loads the theme for [userId] into m.global.theme (MainScene observes it)
 sub JF_LoadTheme(userId as Dynamic)
-    section = CreateObject("roRegistrySection", "jellyflix")
+    section = CreateObject("roRegistrySection", "lanternfish")
     theme = invalid
     for each key in [JF_ThemeKey(userId), JF_ThemeKey(invalid)]
         if theme = invalid and section.Exists(key) then theme = JF_FindTheme(section.Read(key))
@@ -30,7 +30,7 @@ end sub
 
 ' Chooses theme [id] for [userId], and for the device as the default for new profiles
 sub JF_SaveTheme(userId as Dynamic, id as String)
-    section = CreateObject("roRegistrySection", "jellyflix")
+    section = CreateObject("roRegistrySection", "lanternfish")
     section.Write(JF_ThemeKey(userId), id)
     section.Write(JF_ThemeKey(invalid), id)
     section.Flush()
@@ -48,7 +48,7 @@ end function
 
 ' ---- Recoloring components -----------------------------------------------------------------------------------------
 
-' Fields that hold colors on the nodes JellyFlix uses
+' Fields that hold colors on the nodes Lanternfish uses
 function JF_ColorFields() as Object
     return ["color", "focusedColor", "rowLabelColor", "focusBitmapBlendColor", "blendColor"]
 end function

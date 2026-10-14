@@ -150,7 +150,7 @@ end function
 ' The Authorization header the ApiTask sends, for the Video node's own requests
 function authHeader() as String
     q = Chr(34)
-    header = "MediaBrowser Client=" + q + "JellyFlix for Roku" + q + ", Device=" + q + m.global.deviceName.Replace(q, "'") + q
+    header = "MediaBrowser Client=" + q + "Lanternfish for Roku" + q + ", Device=" + q + m.global.deviceName.Replace(q, "'") + q
     header = header + ", DeviceId=" + q + m.global.deviceId + q + ", Version=" + q + m.global.appVersion + q
     return header + ", Token=" + q + m.global.token + q
 end function
@@ -176,7 +176,7 @@ sub onState()
         stopReporting()
         playNext()
     else if state = "error"
-        print "[JellyFlix] playback error "; m.video.errorCode; " "; m.video.errorMsg
+        print "[Lanternfish] playback error "; m.video.errorCode; " "; m.video.errorMsg
         stopReporting()
         if not m.forceTranscode
             ' Direct play didn't work out (an unexpected codec, a bad file): let the server transcode

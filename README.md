@@ -1,14 +1,14 @@
-<p align="center"><img alt="JellyFlix" src="webos/splash.png" width="480"/></p>
+<p align="center"><img alt="Lanternfish" src="webos/splash.png" width="480"/></p>
 
-# JellyFlix clients
+# Lanternfish
 
-TV and device apps for [JellyFlix](https://github.com/yourmomsbasement/JellyFlix-Web), the Netflix-style Jellyfin.
-They work with a Jellyfin server that has the [JellyFlix plugin](https://github.com/yourmomsbasement/JellyFlix-Plugin)
+Lanternfish brings your Jellyfin library to the TV: Roku, Android TV, Google TV, Fire TV, LG webOS and Samsung Tizen.
+The apps build on the [JellyFlix web client](https://github.com/yourmomsbasement/JellyFlix-Web) and work best with a Jellyfin server that has the [JellyFlix plugin](https://github.com/yourmomsbasement/JellyFlix-Plugin)
 installed. Without the plugin you still get a working Jellyfin client, just without profiles and recommendations.
 
 | Platform | Folder | How it works | Output |
 | --- | --- | --- | --- |
-| **Roku** | [`roku/`](roku) | A native SceneGraph/BrightScript channel that talks to the Jellyfin and JellyFlix plugin APIs directly | `jellyflix-roku-<version>.zip` (sideload or submit) |
+| **Roku** | [`roku/`](roku) | A native SceneGraph/BrightScript channel that talks to the Jellyfin and JellyFlix plugin APIs directly | `lanternfish-roku-<version>.zip` (sideload or submit) |
 | **Android TV, Google TV, Fire TV** (and phones and tablets) | [`android/`](android) | A WebView app that loads the JellyFlix web client **from your server**, with NativeShell injected | APK |
 | **LG webOS** | [`webos/`](webos) | Packages the JellyFlix web client release with a webOS NativeShell | `.ipk` |
 | **Samsung Tizen** | [`tizen/`](tizen) | Packages the JellyFlix web client release with a Tizen NativeShell | `.wgt` (signed with your Samsung certificate) |
@@ -49,7 +49,7 @@ Every client offers the same color themes, and each profile picks its own:
 | **Midnight** | periwinkle `#7AA2FF` | The default |
 | Ember | orange `#FF8A3D` | |
 | Aurora | teal `#2ED3B7` | |
-| Classic Red | red `#E50914` | The original JellyFlix look. Its id stays `jellyflix` in the web client, so profiles that chose it keep it |
+| Classic Red | red `#E50914` | The original JellyFlix web client look. Its id stays `jellyflix` in the web client, so profiles that chose it keep it |
 
 - **Roku:** pick one in the side menu (Left on any row) under **Theme**. The choice is stored per profile on the device.
 - **Android, webOS and Tizen:** these use the web client's own setting, **Settings → Display → Theme**, which is stored
@@ -69,8 +69,8 @@ You need Node.js 20+ for everything, `zip`/`unzip`, and JDK 17 for Android. Run 
 ```sh
 npm run check            # Roku lint (BrighterScript) + build-script and Roku helper tests
 
-npm run build:roku       # → dist/jellyflix-roku-<version>.zip
-npm run package:webos    # → dist/com.jellyflix.app_<version>_all.ipk   (downloads the latest JellyFlix web release)
+npm run build:roku       # → dist/lanternfish-roku-<version>.zip
+npm run package:webos    # → dist/app.lanternfish.tv_<version>_all.ipk   (downloads the latest JellyFlix web release)
 npm run build:tizen      # → build/tizen/app                          (then sign, see below)
 cd android && ./gradlew assembleRelease   # → android/app/build/outputs/apk/release/
 ```
@@ -86,23 +86,23 @@ The version of every client comes from `package.json`.
 push and pull request and uploads the results as artifacts. Pushing a `v*` tag publishes them as a GitHub release.
 To get a signed Android release, add these secrets:
 
-- `JELLYFLIX_KEYSTORE_BASE64`
-- `JELLYFLIX_KEYSTORE_PASSWORD`
-- `JELLYFLIX_KEY_ALIAS`
-- `JELLYFLIX_KEY_PASSWORD`
+- `LANTERNFISH_KEYSTORE_BASE64`
+- `LANTERNFISH_KEYSTORE_PASSWORD`
+- `LANTERNFISH_KEY_ALIAS`
+- `LANTERNFISH_KEY_PASSWORD`
 
 ## Installing
 
 - **Roku:** enable developer mode (Home ×3, Up ×2, Right, Left, Right, Left, Right). Open `http://<roku-ip>` and
-  upload `jellyflix-roku-<version>.zip` in the Development Application Installer.
-- **Android TV / Google TV:** `adb install JellyFlix-release.apk`, or sideload with a file manager.
+  upload `lanternfish-roku-<version>.zip` in the Development Application Installer.
+- **Android TV / Google TV:** `adb install app-release.apk`, or sideload with a file manager.
 - **Fire TV:** turn on *Developer options → Install unknown apps*, then `adb connect <fire-tv-ip>` and `adb install …`,
   or use Downloader.
 - **LG webOS:** turn on Developer Mode (LG's Developer Mode app). Then run
-  `npx ares-setup-device` and `npx ares-install -d <tv> dist/com.jellyflix.app_*.ipk`.
+  `npx ares-setup-device` and `npx ares-install -d <tv> dist/app.lanternfish.tv_*.ipk`.
 - **Samsung Tizen:** install Tizen Studio with the TV extensions and create a Samsung certificate. Then run
   `tizen build-web -- build/tizen/app`, `tizen package -t wgt -s <profile> -- build/tizen/app/.buildResult`, and
-  `tizen install -n JellyFlix.wgt -t <tv>`.
+  `tizen install -n Lanternfish.wgt -t <tv>`.
 
 On first launch each app asks for your server. It looks for servers on the local network and also accepts an
 address typed in, e.g. `192.168.1.10:8096` or `https://jellyfin.example.com`.
@@ -111,8 +111,8 @@ address typed in, e.g. `192.168.1.10:8096` or `https://jellyfin.example.com`.
 
 | Path | What |
 | --- | --- |
-| `shared/nativeshell.js` | The `window.NativeShell` jellyfin-web expects, built from a small per-platform adapter (`window.JellyFlixPlatform`) |
-| `webos/`, `tizen/` | Manifests, icons and each platform's adapter (`jellyflix-platform.js`) |
+| `shared/nativeshell.js` | The `window.NativeShell` jellyfin-web expects, built from a small per-platform adapter (`window.LanternfishPlatform`) |
+| `webos/`, `tizen/` | Manifests, icons and each platform's adapter (`lanternfish-platform.js`) |
 | `android/` | Kotlin app: `MainActivity` (WebView, Back handling, index injection), `ConnectActivity` (server picker), `NativeBridge` (JS ↔ Android), `DeviceCapabilities`, `ServerDiscovery` |
 | `roku/source/main.brs` | Channel entry point and deep links |
 | `roku/components/MainScene.*` | Screen stack and navigation |

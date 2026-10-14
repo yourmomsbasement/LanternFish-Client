@@ -1,4 +1,4 @@
 # Methods called from JavaScript through addJavascriptInterface
--keepclassmembers class app.jellyflix.android.NativeBridge {
+-keepclassmembers class app.lanternfish.NativeBridge {
     @android.webkit.JavascriptInterface <methods>;
 }

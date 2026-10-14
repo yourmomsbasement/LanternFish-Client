@@ -1,5 +1,5 @@
 /*
- * JellyFlix for LG webOS: the platform adapter read by shared/nativeshell.js.
+ * Lanternfish for LG webOS: the platform adapter read by shared/nativeshell.js.
  *
  * appinfo.json sets disableBackHistoryAPI, so the Back key (461) reaches the web client, which steps back through its
  * own pages and asks to exit from the home screen.
@@ -55,7 +55,7 @@
         if (result && result.configs) config = result.configs;
     });
 
-    window.JellyFlixPlatform = {
+    window.LanternfishPlatform = {
         name: 'webOS',
         appVersion: '{{version}}',
         layout: 'tv',

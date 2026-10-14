@@ -37,7 +37,7 @@ end sub
 sub show(name as String, params as Object, reset as Boolean)
     screen = CreateObject("roSGNode", name)
     if screen = invalid
-        print "[JellyFlix] unknown screen "; name
+        print "[Lanternfish] unknown screen "; name
         return
     end if
     screen.observeField("navigate", "onNavigate")

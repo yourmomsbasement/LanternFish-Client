@@ -1,7 +1,7 @@
 // Zips the Roku channel for sideloading (http://<roku-ip> → Development Application Installer) or for the Roku
 // Developer Dashboard. The manifest's version is set from package.json.
 //
-//   node scripts/package-roku.mjs   → dist/jellyflix-roku-<version>.zip
+//   node scripts/package-roku.mjs   → dist/lanternfish-roku-<version>.zip
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -32,9 +32,9 @@ export async function packageRoku() {
 
     const dist = join(ROOT, 'dist');
     await writeText(join(dist, '.keep'), '');
-    const zipPath = join(dist, `jellyflix-roku-${version}.zip`);
+    const zipPath = join(dist, `lanternfish-roku-${version}.zip`);
     zipDir(out, zipPath);
-    console.log(`JellyFlix for Roku ${version} packaged as ${zipPath}`);
+    console.log(`Lanternfish for Roku ${version} packaged as ${zipPath}`);
     return zipPath;
 }
 

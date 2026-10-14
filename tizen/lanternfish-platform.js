@@ -1,5 +1,5 @@
 /*
- * JellyFlix for Samsung Tizen: the platform adapter read by shared/nativeshell.js.
+ * Lanternfish for Samsung Tizen: the platform adapter read by shared/nativeshell.js.
  *
  * Remote keys other than the arrows, Enter and Back reach a Tizen app only once registered; the web client already
  * maps the Tizen key codes (10009 Back, 10252 Play/Pause, 412/417 Rewind/Fast forward…).
@@ -26,7 +26,7 @@
         return match ? parseInt(match[1], 10) + parseInt(match[2], 10) / 10 : 0;
     }
 
-    window.JellyFlixPlatform = {
+    window.LanternfishPlatform = {
         name: 'Tizen',
         appVersion: '{{version}}',
         layout: 'tv',

@@ -1,4 +1,4 @@
-package app.jellyflix.android
+package app.lanternfish
 
 import java.net.URI
 

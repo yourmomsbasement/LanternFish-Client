@@ -1,13 +1,13 @@
 /*
- * JellyFlix NativeShell
+ * Lanternfish NativeShell
  *
  * The JellyFlix web client (a jellyfin-web fork) asks `window.NativeShell` for everything a host app knows better
  * than a browser: the device's name and id, which layout to start in, which features exist, what the device can play
- * and how to leave the app. This file builds that object from a small platform adapter, `window.JellyFlixPlatform`,
+ * and how to leave the app. This file builds that object from a small platform adapter, `window.LanternfishPlatform`,
  * which each client (webOS, Tizen, Android) defines in a script loaded before this one.
  *
  * Adapter shape (every member is optional unless noted):
- *   name            (required) e.g. 'webOS'; shown in the server's device list as "JellyFlix for <name>"
+ *   name            (required) e.g. 'webOS'; shown in the server's device list as "Lanternfish for <name>"
  *   appVersion      the client's own version
  *   deviceName()    a friendly device name, e.g. "LG OLED65C3"
  *   deviceId()      a stable id; one is generated and stored when missing
@@ -25,15 +25,15 @@
 (function () {
     'use strict';
 
-    var platform = window.JellyFlixPlatform;
+    var platform = window.LanternfishPlatform;
     if (!platform) {
-        console.error('[JellyFlix] window.JellyFlixPlatform is missing; NativeShell not installed');
+        console.error('[Lanternfish] window.LanternfishPlatform is missing; NativeShell not installed');
         return;
     }
 
-    var DEVICE_ID_KEY = 'jellyflix-device-id';
+    var DEVICE_ID_KEY = 'lanternfish-device-id';
 
-    // Features every JellyFlix TV client supports. Names match jellyfin-web's AppFeature enum.
+    // Features every Lanternfish TV client supports. Names match jellyfin-web's AppFeature enum.
     var BASE_FEATURES = [
         'exit',
         'exitmenu',
@@ -70,7 +70,7 @@
             }
             return id;
         } catch (err) {
-            console.warn('[JellyFlix] localStorage unavailable, device id will not persist', err);
+            console.warn('[Lanternfish] localStorage unavailable, device id will not persist', err);
             return generateId();
         }
     }
@@ -82,7 +82,7 @@
             var value = fn.apply(platform, Array.prototype.slice.call(arguments, 2));
             return value === undefined ? fallback : value;
         } catch (err) {
-            console.error('[JellyFlix] platform.' + name + ' failed', err);
+            console.error('[Lanternfish] platform.' + name + ' failed', err);
             return fallback;
         }
     }
@@ -101,7 +101,7 @@
             });
         },
         appName: function () {
-            return 'JellyFlix for ' + platform.name;
+            return 'Lanternfish for ' + platform.name;
         },
         appVersion: function () {
             return platform.appVersion || '1.0.0';
@@ -113,7 +113,7 @@
             return cachedDeviceId;
         },
         deviceName: function () {
-            return call('deviceName', null) || ('JellyFlix ' + platform.name);
+            return call('deviceName', null) || ('Lanternfish ' + platform.name);
         },
         exit: function () {
             if (typeof platform.exit === 'function') {
@@ -187,6 +187,6 @@
         };
     }
 
-    // Lets the web client and the shells tell a packaged JellyFlix app from a plain browser.
-    window.appMode = platform.appMode || 'jellyflix';
+    // Lets the web client and the shells tell a packaged Lanternfish app from a plain browser.
+    window.appMode = platform.appMode || 'lanternfish';
 })();

@@ -5,14 +5,14 @@
     <script type="text/brightscript" uri="pkg:/components/common/Theme.brs" />
     <script type="text/brightscript" uri="pkg:/components/common/Themes.brs" />
     <children>
-        <Label text="JELLYFLIX" width="1920" translation="[0, 140]" horizAlign="center" color="0xE50914FF">
+        <Label text="Lanternfish" width="1920" translation="[0, 140]" horizAlign="center" color="0xE50914FF">
             <Font role="font" uri="font:BoldSystemFontFile" size="96" />
         </Label>
         <Label text="Connect to your server" width="1920" translation="[0, 290]" horizAlign="center" color="0xFFFFFFFF">
             <Font role="font" uri="font:BoldSystemFontFile" size="44" />
         </Label>
         <Label width="1100" translation="[410, 360]" horizAlign="center" wrap="true" color="0xB3B3B3FF"
-               text="Pick your Jellyfin server below, or enter its address. JellyFlix needs the JellyFlix plugin installed on the server for profiles and recommendations.">
+               text="Pick your Jellyfin server below, or enter its address. Lanternfish needs the JellyFlix plugin installed on the server for profiles and recommendations.">
             <Font role="font" uri="font:SystemFontFile" size="28" />
         </Label>
         <LabelList id="options" translation="[560, 500]" itemSize="[800, 76]" itemSpacing="[0, 12]"

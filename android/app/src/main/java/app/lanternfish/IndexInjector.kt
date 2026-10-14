@@ -1,4 +1,4 @@
-package app.jellyflix.android
+package app.lanternfish
 
 import android.content.Context
 import android.webkit.WebResourceResponse
@@ -14,7 +14,7 @@ import java.net.URL
 class IndexInjector(context: Context) {
     private val scripts: String by lazy {
         val assets = context.assets
-        listOf("jellyflix/platform.js", "jellyflix/nativeshell.js").joinToString("") { path ->
+        listOf("lanternfish/platform.js", "lanternfish/nativeshell.js").joinToString("") { path ->
             val source = assets.open(path).bufferedReader().use { it.readText() }
             // A literal "</script>" inside the inlined code would end the tag early
             "<script>\n${source.replace("</script", "<\\/script")}\n</script>"

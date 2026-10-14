@@ -22,7 +22,7 @@ function JF_DeviceProfile() as Object
     if caps.hevcMain10 then hevcProfiles = "main|main 10"
 
     return {
-        Name: "JellyFlix for Roku",
+        Name: "Lanternfish for Roku",
         MaxStreamingBitrate: caps.maxBitrate,
         MaxStaticBitrate: 200000000,
         MusicStreamingTranscodingBitrate: 192000,

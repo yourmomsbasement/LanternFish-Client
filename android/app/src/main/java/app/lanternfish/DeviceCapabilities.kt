@@ -1,4 +1,4 @@
-package app.jellyflix.android
+package app.lanternfish
 
 import android.app.UiModeManager
 import android.content.Context

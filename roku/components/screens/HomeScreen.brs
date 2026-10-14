@@ -5,7 +5,7 @@ function homeRows() as Object
         ["nextup", "Next Up"],
         ["toppicks", "Top Picks"],
         ["mylist", "My List"],
-        ["latest", "New on JellyFlix"],
+        ["latest", "New on Lanternfish"],
         ["because", ""],
         ["toprated", "Top Rated"]
     ]
@@ -215,7 +215,7 @@ sub onItemSelected()
     node = focusedNode()
     if node = invalid then return
     tag = m.rowTags[m.rows.rowItemSelected[0]]
-    ' Continue Watching and Next Up play straight away, as on Netflix
+    ' Continue Watching and Next Up play straight away
     if (tag = "resume" or tag = "nextup") and node.playable
         m.top.navigate = { screen: "PlayerScreen", params: { itemId: node.itemId } }
     else

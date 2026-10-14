@@ -1,4 +1,4 @@
-package app.jellyflix.android
+package app.lanternfish
 
 import android.webkit.JavascriptInterface
 import org.json.JSONArray
@@ -6,7 +6,7 @@ import org.json.JSONObject
 import kotlin.concurrent.thread
 
 /**
- * `window.JellyFlixAndroid` in the web client. assets/jellyflix/platform.js turns it into the platform adapter that
+ * `window.LanternfishAndroid` in the web client. assets/lanternfish/platform.js turns it into the platform adapter that
  * shared/nativeshell.js reads. Methods run on a WebView binder thread; anything touching views goes through [host].
  */
 class NativeBridge(
@@ -61,13 +61,13 @@ class NativeBridge(
 
     @JavascriptInterface fun setPlaying(playing: Boolean) = onMain { setPlaying(playing) }
 
-    /** Answers through `window.__jellyflixResolve(callbackId, servers)` once discovery finishes. */
+    /** Answers through `window.__lanternfishResolve(callbackId, servers)` once discovery finishes. */
     @JavascriptInterface
     fun findServers(callbackId: Int, timeoutMs: Int) {
-        thread(name = "jellyflix-discovery") {
+        thread(name = "lanternfish-discovery") {
             val servers = JSONArray()
             discovery.discover(timeoutMs.coerceIn(500, 5000)).forEach { servers.put(it.toJson()) }
-            val script = "window.__jellyflixResolve && window.__jellyflixResolve($callbackId, $servers);"
+            val script = "window.__lanternfishResolve && window.__lanternfishResolve($callbackId, $servers);"
             onMain { evaluate(script) }
         }
     }

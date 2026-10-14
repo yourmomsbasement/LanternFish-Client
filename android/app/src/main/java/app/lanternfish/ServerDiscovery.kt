@@ -1,4 +1,4 @@
-package app.jellyflix.android
+package app.lanternfish
 
 import android.content.Context
 import android.net.wifi.WifiManager
@@ -22,7 +22,7 @@ class ServerDiscovery(private val context: Context) {
     fun discover(timeoutMs: Int = 2500): List<DiscoveredServer> {
         val wifi = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
         // Many devices drop incoming broadcast replies on Wi-Fi without a multicast lock
-        val lock = wifi?.createMulticastLock("jellyflix-discovery")?.apply {
+        val lock = wifi?.createMulticastLock("lanternfish-discovery")?.apply {
             setReferenceCounted(false)
             acquire()
         }

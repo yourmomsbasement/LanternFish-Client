@@ -1,8 +1,8 @@
 {
-  "name": "jellyflix-client",
+  "name": "lanternfish-client",
   "version": "0.1.0",
   "private": true,
-  "description": "JellyFlix TV clients: LG webOS, Samsung Tizen, Android TV / Fire TV / Google TV and Roku",
+  "description": "Lanternfish TV clients: LG webOS, Samsung Tizen, Android TV / Fire TV / Google TV and Roku",
   "license": "GPL-2.0-or-later",
   "type": "module",
   "engines": {

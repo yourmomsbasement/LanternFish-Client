@@ -1,7 +1,7 @@
-' JellyFlix for Roku
+' Lanternfish for Roku
 '
 ' A native SceneGraph client for Jellyfin servers running the JellyFlix plugin: "Who's watching?" profiles, a
-' Netflix-style home of poster rows with recommendations, title pages, episodes, search and playback.
+' home of poster rows with recommendations, title pages, episodes, search and playback.
 
 sub Main(args as Dynamic)
     screen = CreateObject("roSGScreen")

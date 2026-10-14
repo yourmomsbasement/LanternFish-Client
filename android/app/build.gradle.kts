@@ -18,11 +18,11 @@ val keystoreProperties = Properties().apply {
 fun signingValue(key: String, env: String): String? = keystoreProperties.getProperty(key) ?: System.getenv(env)
 
 android {
-    namespace = "app.jellyflix.android"
+    namespace = "app.lanternfish"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "app.jellyflix.android"
+        applicationId = "app.lanternfish"
         // Fire OS 5 (first Fire TV Stick) is API 22
         minSdk = 22
         targetSdk = 35
@@ -31,13 +31,13 @@ android {
     }
 
     signingConfigs {
-        val storeFile = signingValue("storeFile", "JELLYFLIX_KEYSTORE")
+        val storeFile = signingValue("storeFile", "LANTERNFISH_KEYSTORE")
         if (storeFile != null) {
             create("release") {
                 this.storeFile = file(storeFile)
-                storePassword = signingValue("storePassword", "JELLYFLIX_KEYSTORE_PASSWORD")
-                keyAlias = signingValue("keyAlias", "JELLYFLIX_KEY_ALIAS")
-                keyPassword = signingValue("keyPassword", "JELLYFLIX_KEY_PASSWORD")
+                storePassword = signingValue("storePassword", "LANTERNFISH_KEYSTORE_PASSWORD")
+                keyAlias = signingValue("keyAlias", "LANTERNFISH_KEY_ALIAS")
+                keyPassword = signingValue("keyPassword", "LANTERNFISH_KEY_PASSWORD")
             }
         }
     }
@@ -53,7 +53,7 @@ android {
         }
     }
 
-    sourceSets["main"].assets.srcDir(layout.buildDirectory.dir("generated/jellyflix-assets"))
+    sourceSets["main"].assets.srcDir(layout.buildDirectory.dir("generated/lanternfish-assets"))
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -75,7 +75,7 @@ android {
 // shared/nativeshell.js is the same file the webOS and Tizen apps use; copy it into the APK's assets
 val copySharedAssets by tasks.registering(Copy::class) {
     from(rootProject.file("../shared/nativeshell.js"))
-    into(layout.buildDirectory.dir("generated/jellyflix-assets/jellyflix"))
+    into(layout.buildDirectory.dir("generated/lanternfish-assets/lanternfish"))
 }
 tasks.named("preBuild") { dependsOn(copySharedAssets) }
 

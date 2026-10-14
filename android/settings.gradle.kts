@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "JellyFlix"
+rootProject.name = "Lanternfish"
 include(":app")

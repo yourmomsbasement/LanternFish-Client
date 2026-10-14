@@ -1,8 +1,8 @@
 ' HTTP for tasks: the Jellyfin authorization header and a JSON request helper.
 
-' MediaBrowser Client="JellyFlix for Roku", Device="Living Room", DeviceId="…", Version="0.1.0", Token="…"
+' MediaBrowser Client="Lanternfish for Roku", Device="Living Room", DeviceId="…", Version="0.1.0", Token="…"
 function Http_AuthHeader() as String
-    header = "MediaBrowser Client=" + Chr(34) + "JellyFlix for Roku" + Chr(34)
+    header = "MediaBrowser Client=" + Chr(34) + "Lanternfish for Roku" + Chr(34)
     header = header + ", Device=" + Chr(34) + Http_Quote(m.global.deviceName) + Chr(34)
     header = header + ", DeviceId=" + Chr(34) + m.global.deviceId + Chr(34)
     header = header + ", Version=" + Chr(34) + m.global.appVersion + Chr(34)

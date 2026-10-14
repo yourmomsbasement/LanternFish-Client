@@ -73,20 +73,20 @@ export async function packageWeb(platformName, options = {}) {
     }
 
     // NativeShell: the platform adapter first, then the shared shell that reads it
-    await copy(join(source, 'jellyflix-platform.js'), join(out, 'jellyflix', 'platform.js'));
-    await copy(join(ROOT, 'shared', 'nativeshell.js'), join(out, 'jellyflix', 'nativeshell.js'));
-    const platformJs = await readFile(join(out, 'jellyflix', 'platform.js'), 'utf8');
-    await writeText(join(out, 'jellyflix', 'platform.js'), fillTemplate(platformJs, { version }));
+    await copy(join(source, 'lanternfish-platform.js'), join(out, 'lanternfish', 'platform.js'));
+    await copy(join(ROOT, 'shared', 'nativeshell.js'), join(out, 'lanternfish', 'nativeshell.js'));
+    const platformJs = await readFile(join(out, 'lanternfish', 'platform.js'), 'utf8');
+    await writeText(join(out, 'lanternfish', 'platform.js'), fillTemplate(platformJs, { version }));
 
     const indexPath = join(out, 'index.html');
     const html = await readFile(indexPath, 'utf8');
     await writeText(indexPath, injectIntoHead(html, [
         ...platform.head,
-        '<script src="jellyflix/platform.js"></script>',
-        '<script src="jellyflix/nativeshell.js"></script>'
+        '<script src="lanternfish/platform.js"></script>',
+        '<script src="lanternfish/nativeshell.js"></script>'
     ]));
 
-    console.log(`JellyFlix for ${platformName} ${version} built in ${out}`);
+    console.log(`Lanternfish for ${platformName} ${version} built in ${out}`);
     return out;
 }
 

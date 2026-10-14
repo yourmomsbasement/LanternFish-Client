@@ -1,4 +1,4 @@
-package app.jellyflix.android
+package app.lanternfish
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
@@ -90,7 +90,7 @@ class MainActivity : Activity(), NativeBridge.Host {
             // "Mobile" as a phone; say what this device really is
             var agent = userAgentString
             if (capabilities.isTv) agent = agent.replace(" Mobile", "") + " SmartTV"
-            agent += " JellyFlix/${BuildConfig.VERSION_NAME}"
+            agent += " Lanternfish/${BuildConfig.VERSION_NAME}"
             userAgentString = agent
             userAgent = agent
         }
@@ -98,7 +98,7 @@ class MainActivity : Activity(), NativeBridge.Host {
         webView.isFocusableInTouchMode = true
 
         val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID) ?: "unknown"
-        webView.addJavascriptInterface(NativeBridge(this, capabilities, ServerDiscovery(this), deviceId), "JellyFlixAndroid")
+        webView.addJavascriptInterface(NativeBridge(this, capabilities, ServerDiscovery(this), deviceId), "LanternfishAndroid")
         webView.webViewClient = Client()
         webView.webChromeClient = Chrome()
     }
@@ -226,7 +226,7 @@ class MainActivity : Activity(), NativeBridge.Host {
 
     override fun onDestroy() {
         if (::webView.isInitialized) {
-            webView.removeJavascriptInterface("JellyFlixAndroid")
+            webView.removeJavascriptInterface("LanternfishAndroid")
             webView.destroy()
         }
         super.onDestroy()

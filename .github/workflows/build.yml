@@ -44,7 +44,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: roku
-          path: dist/jellyflix-roku-*.zip
+          path: dist/lanternfish-roku-*.zip
 
   webos:
     name: LG webOS
@@ -99,16 +99,16 @@ jobs:
           cache: gradle
       - name: Release signing key
         env:
-          KEYSTORE_BASE64: ${{ secrets.JELLYFLIX_KEYSTORE_BASE64 }}
+          KEYSTORE_BASE64: ${{ secrets.LANTERNFISH_KEYSTORE_BASE64 }}
         if: env.KEYSTORE_BASE64 != ''
         run: |
           echo "$KEYSTORE_BASE64" | base64 --decode > release.keystore
-          echo "JELLYFLIX_KEYSTORE=$PWD/release.keystore" >> "$GITHUB_ENV"
+          echo "LANTERNFISH_KEYSTORE=$PWD/release.keystore" >> "$GITHUB_ENV"
       - name: Build
         env:
-          JELLYFLIX_KEYSTORE_PASSWORD: ${{ secrets.JELLYFLIX_KEYSTORE_PASSWORD }}
-          JELLYFLIX_KEY_ALIAS: ${{ secrets.JELLYFLIX_KEY_ALIAS }}
-          JELLYFLIX_KEY_PASSWORD: ${{ secrets.JELLYFLIX_KEY_PASSWORD }}
+          LANTERNFISH_KEYSTORE_PASSWORD: ${{ secrets.LANTERNFISH_KEYSTORE_PASSWORD }}
+          LANTERNFISH_KEY_ALIAS: ${{ secrets.LANTERNFISH_KEY_ALIAS }}
+          LANTERNFISH_KEY_PASSWORD: ${{ secrets.LANTERNFISH_KEY_PASSWORD }}
         run: ./gradlew --no-daemon testDebugUnitTest assembleDebug assembleRelease
       - uses: actions/upload-artifact@v4
         with:
@@ -130,6 +130,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --title "JellyFlix clients $GITHUB_REF_NAME" \
+          gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --title "Lanternfish $GITHUB_REF_NAME" \
             --notes "Roku, LG webOS, Samsung Tizen (unsigned app folder) and Android TV / Fire TV builds." \
             $(find artifacts -type f)

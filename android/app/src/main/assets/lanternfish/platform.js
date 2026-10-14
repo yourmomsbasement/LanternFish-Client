@@ -1,11 +1,11 @@
 /*
- * JellyFlix for Android TV, Fire TV and Android phones: the platform adapter read by shared/nativeshell.js, backed by
- * the app's `window.JellyFlixAndroid` bridge (NativeBridge.kt). Inlined into the server's index.html by the app.
+ * Lanternfish for Android TV, Fire TV and Android phones: the platform adapter read by shared/nativeshell.js, backed by
+ * the app's `window.LanternfishAndroid` bridge (NativeBridge.kt). Inlined into the server's index.html by the app.
  */
 (function () {
     'use strict';
 
-    var bridge = window.JellyFlixAndroid;
+    var bridge = window.LanternfishAndroid;
     if (!bridge) return;
 
     function json(text, fallback) {
@@ -18,7 +18,7 @@
 
     var pending = {};
     var nextCallback = 1;
-    window.__jellyflixResolve = function (id, value) {
+    window.__lanternfishResolve = function (id, value) {
         var resolve = pending[id];
         delete pending[id];
         if (resolve) resolve(value);
@@ -26,7 +26,7 @@
 
     var tv = bridge.isTv();
 
-    window.JellyFlixPlatform = {
+    window.LanternfishPlatform = {
         name: bridge.platformName(),
         appVersion: bridge.appVersion(),
         // Phones and tablets get the JellyFlix web client's responsive layout

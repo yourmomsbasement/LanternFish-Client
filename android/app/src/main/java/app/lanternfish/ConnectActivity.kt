@@ -1,4 +1,4 @@
-package app.jellyflix.android
+package app.lanternfish
 
 import android.app.Activity
 import android.content.Intent
@@ -52,7 +52,7 @@ class ConnectActivity : Activity() {
 
     private fun discover() {
         status.setText(R.string.connect_searching)
-        thread(name = "jellyflix-discovery") {
+        thread(name = "lanternfish-discovery") {
             val found = ServerDiscovery(this).discover()
             main.post {
                 if (isFinishing || connecting) return@post
@@ -93,7 +93,7 @@ class ConnectActivity : Activity() {
         connecting = true
         connect.isEnabled = false
         status.text = getString(R.string.connect_checking, trimmed)
-        thread(name = "jellyflix-connect") {
+        thread(name = "lanternfish-connect") {
             val result = runCatching { ServerProbe.find(trimmed) }
             main.post {
                 connecting = false

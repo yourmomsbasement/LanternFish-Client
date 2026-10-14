@@ -1,4 +1,4 @@
-' Helpers shared by every JellyFlix component. Include with
+' Helpers shared by every Lanternfish component. Include with
 '   <script type="text/brightscript" uri="pkg:/components/common/Utils.brs" />
 
 ' ---- Colors and text ------------------------------------------------------------------------------------------------
@@ -226,19 +226,19 @@ end function
 ' ---- Registry -------------------------------------------------------------------------------------------------------
 
 function JF_RegistryRead(key as String) as String
-    section = CreateObject("roRegistrySection", "jellyflix")
+    section = CreateObject("roRegistrySection", "lanternfish")
     if section.Exists(key) then return section.Read(key)
     return ""
 end function
 
 sub JF_RegistryWrite(key as String, value as String)
-    section = CreateObject("roRegistrySection", "jellyflix")
+    section = CreateObject("roRegistrySection", "lanternfish")
     section.Write(key, value)
     section.Flush()
 end sub
 
 sub JF_RegistryDelete(key as String)
-    section = CreateObject("roRegistrySection", "jellyflix")
+    section = CreateObject("roRegistrySection", "lanternfish")
     section.Delete(key)
     section.Flush()
 end sub

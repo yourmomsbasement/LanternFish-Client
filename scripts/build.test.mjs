@@ -31,8 +31,8 @@ test('arguments parse into flags and positionals', () => {
 });
 
 test('the Roku manifest takes the client version', () => {
-    const manifest = 'title=JellyFlix\nmajor_version=0\nminor_version=1\nbuild_version=0\n';
-    assert.equal(setManifestVersion(manifest, '1.4.12'), 'title=JellyFlix\nmajor_version=1\nminor_version=4\nbuild_version=12\n');
+    const manifest = 'title=Lanternfish\nmajor_version=0\nminor_version=1\nbuild_version=0\n';
+    assert.equal(setManifestVersion(manifest, '1.4.12'), 'title=Lanternfish\nmajor_version=1\nminor_version=4\nbuild_version=12\n');
 });
 
 test('themes are complete and the generated code is up to date', async () => {

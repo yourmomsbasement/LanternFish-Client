@@ -1,24 +1,45 @@
 #!/usr/bin/env bash
-# Renders every icon, banner and splash screen the clients need from the JellyFlix wordmark.
+# Renders every icon, banner and splash screen the clients need from the Lanternfish wordmark.
 # Needs ImageMagick and the Inter font. The results are committed, so this only runs when the artwork changes.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-FONT="${JELLYFLIX_FONT:-/usr/share/fonts/opentype/inter/Inter-Black.otf}"
-BG='#141414'
-RED='#e50914'
+FONT="${LANTERNFISH_FONT:-/usr/share/fonts/opentype/inter/Inter-Black.otf}"
+# The Midnight theme's colors (shared/themes.json)
+BG='#0D1117'
+ACCENT='#7AA2FF'
+GLOW='#DCE6FF'
 
-# Square icon: a red "J" (+ "F") monogram
-icon() { # size out
-    convert -size "$1x$1" "xc:$BG" -font "$FONT" -fill "$RED" -gravity center \
-        -pointsize "$(( $1 * 62 / 100 ))" -annotate +0+0 'JF' "$2"
+# The lure: a lanternfish's glowing bulb on a curved stalk. Draws onto image $1 at (cx, cy) with bulb radius r.
+lure() { # in cx cy r out
+    local cx=$2 cy=$3 r=$4
+    local sx=$(( cx - r * 4 )) sy=$(( cy + r * 5 ))
+    convert "$1" \
+        \( -size "$(identify -format '%wx%h' "$1")" xc:none -fill "$ACCENT" -draw "circle $cx,$cy $(( cx + r * 3 )),$cy" -blur "0x$(( r * 2 ))" \) -composite \
+        -fill none -stroke "$ACCENT" -strokewidth "$(( r / 3 + 1 ))" -draw "path 'M $sx,$sy Q $(( cx - r * 4 )),$(( cy - r )) $(( cx - r )),$cy'" \
+        -stroke none -fill "$ACCENT" -draw "circle $cx,$cy $(( cx + r )),$cy" \
+        -fill "$GLOW" -draw "circle $(( cx - r / 3 )),$(( cy - r / 3 )) $(( cx )),$(( cy - r / 3 ))" \
+        "$5"
 }
-# Wide image: the wordmark centered with a red glow at the bottom
+
+# Square icon: the lure over a white "L"
+icon() { # size out
+    local s=$1
+    convert -size "${s}x${s}" "xc:$BG" -font "$FONT" -fill white -gravity southwest \
+        -pointsize "$(( s * 70 / 100 ))" -annotate "+$(( s * 14 / 100 ))+$(( s * 2 / 100 ))" 'L' "$2"
+    lure "$2" $(( s * 70 / 100 )) $(( s * 27 / 100 )) $(( s * 8 / 100 + 1 )) "$2"
+}
+
+# Wide image: the wordmark, with the lure growing out of its "L" as on the icon
 wide() { # width height out
-    local w=$1 h=$2
-    convert -size "${w}x${h}" "radial-gradient:#3a0508-$BG" -gravity south -crop "${w}x${h}+0+0" +repage \
-        \( -size "${w}x${h}" "xc:$BG" \) -compose blend -define compose:args=60 -composite \
-        -font "$FONT" -fill "$RED" -gravity center -pointsize "$(( w / 7 ))" -annotate +0+0 'JELLYFLIX' -depth 8 -colors 128 "$3"
+    local w=$1 h=$2 p=$(( $1 / 8 ))
+    local tw
+    tw=$(convert -font "$FONT" -pointsize "$p" label:'Lanternfish' -format '%w' info:)
+    local x0=$(( (w - tw) / 2 )) top=$(( h / 2 - p * 36 / 100 ))
+    local r=$(( p / 11 + 1 ))
+    convert -size "${w}x${h}" "xc:$BG" -font "$FONT" -fill white -gravity west \
+        -pointsize "$p" -annotate "+${x0}+0" 'Lanternfish' "$3"
+    lure "$3" $(( x0 + p * 9 / 100 + r * 4 )) $(( top - r * 5 )) "$r" "$3"
 }
 
 mkdir -p webos tizen roku/images \
