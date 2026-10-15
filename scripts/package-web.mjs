@@ -10,6 +10,23 @@ import { pathToFileURL } from 'node:url';
 import { fetchWeb, WEB_DIR } from './fetch-web.mjs';
 import { BUILD, clean, copy, exists, parseArgs, readJson, ROOT, writeText } from './lib.mjs';
 
+/**
+ * Web client plugins the TV apps leave out. The client imports every listed plugin before showing its first screen,
+ * so each one costs startup time on a TV's slow processor:
+ *   chromecastPlayer  casting from a TV to a Chromecast isn't a thing
+ *   comicsPlayer      loads an archive library (libarchive.js) at startup, for comic book files
+ */
+export const TV_EXCLUDED_PLUGINS = ['chromecastPlayer/plugin', 'comicsPlayer/plugin'];
+
+/** The web client's config.json with [excluded] plugins left out of its startup list. */
+export function withoutPlugins(configText, excluded) {
+    const config = JSON.parse(configText);
+    if (Array.isArray(config.plugins)) {
+        config.plugins = config.plugins.filter((plugin) => !excluded.includes(plugin));
+    }
+    return JSON.stringify(config, null, 2) + '\n';
+}
+
 const PLATFORMS = {
     webos: {
         manifest: 'appinfo.json',
@@ -60,6 +77,12 @@ export async function packageWeb(platformName, options = {}) {
         // Service workers can't register from file:// or app:// origins; leave them out
         if (entry.startsWith('serviceworker')) continue;
         await copy(join(WEB_DIR, entry), join(out, entry));
+    }
+
+    // A lighter startup: plugins a TV doesn't use aren't loaded
+    const configPath = join(out, 'config.json');
+    if (await exists(configPath)) {
+        await writeText(configPath, withoutPlugins(await readFile(configPath, 'utf8'), TV_EXCLUDED_PLUGINS));
     }
 
     // Platform manifest and icons
