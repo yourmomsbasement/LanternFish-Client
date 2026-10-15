@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { releaseUrl } from './fetch-web.mjs';
 import { parseArgs } from './lib.mjs';
-import { fillTemplate, injectIntoHead } from './package-web.mjs';
+import { fillTemplate, injectIntoHead, TV_EXCLUDED_PLUGINS, withoutPlugins } from './package-web.mjs';
 import { setManifestVersion } from './package-roku.mjs';
 
 test('NativeShell scripts go first in <head>', () => {
@@ -45,4 +45,12 @@ test('themes are complete and the generated code is up to date', async () => {
     assert.throws(() => validate({ ...config, themes: [theme('a', 'red')] }), /#RRGGBB/);
     assert.throws(() => validate({ ...config, themes: [theme('a', '#000001')] }), /both/);
     assert.throws(() => validate({ ...config, default: 'b' }), /No theme "b"/);
+});
+
+test('TV packages leave out plugins a TV never uses, and keep the rest of the config', () => {
+    const config = JSON.stringify({ multiserver: false, plugins: ['htmlVideoPlayer/plugin', 'chromecastPlayer/plugin', 'comicsPlayer/plugin', 'bookPlayer/plugin'] });
+    const result = JSON.parse(withoutPlugins(config, TV_EXCLUDED_PLUGINS));
+    assert.deepEqual(result.plugins, ['htmlVideoPlayer/plugin', 'bookPlayer/plugin']);
+    assert.equal(result.multiserver, false);
+    assert.equal(withoutPlugins('{"servers":[]}', TV_EXCLUDED_PLUGINS), '{\n  "servers": []\n}\n');
 });
